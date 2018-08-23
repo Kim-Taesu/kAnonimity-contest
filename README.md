@@ -1,4 +1,3 @@
 # kAnonimity
-2018 OSS Grand Developers Challange를 위한 저장소입니다.
-
-
+2018 OSS Grand Developers Challange�??�한 ?�?�소?�니??
+My name is JongHyun!
