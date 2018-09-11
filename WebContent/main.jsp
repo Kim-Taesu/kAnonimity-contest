@@ -41,7 +41,7 @@
         <span class="d-block d-lg-none">Data Privacy Project</span>
         <span class="d-none d-lg-block">
           <!-- <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt=""> -->
-        </span>					
+        </span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -49,25 +49,25 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Start">Start</a>
+            <a class="nav-link js-scroll-trigger" href="main.jsp">Start</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Input">Data Input</a>
+            <a class="nav-link js-scroll-trigger" href="dataInput.jsp">Data Input</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#SelectQI">Quasi-Identifier</a>
+            <a class="nav-link js-scroll-trigger" href="quasiIdentifier.jsp">Quasi-Identifier</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Taxonomy">Taxonomy tree</a>
+            <a class="nav-link js-scroll-trigger" href="taxonomyTree.jsp">Taxonomy tree</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Example">Example</a>
+            <a class="nav-link js-scroll-trigger" href="example.jsp">Example</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Review">Review</a>
+            <a class="nav-link js-scroll-trigger" href="review.jsp">Review</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#Download">Download</a>
+            <a class="nav-link js-scroll-trigger" href="download.jsp">Download</a>
           </li>
         </ul>
       </div>
@@ -105,178 +105,45 @@
 			</div>
       </section>
 
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Input">
-	      <div class="container">
-	      		<h2>Select your data</h2>
-		      	<form method="POST" action="#" enctype="multipart/form-data">
-					<!-- COMPONENT START -->
-					<div class="form-group">
-						<div class="input-group input-file" name="Fichier1">
-					   		<input type="text" class="form-control" placeholder='Choose a file...' />			
-					        <span class="input-group-btn">
-					       	<button class="btn btn-default btn-choose" type="button" onclick="upload()">Choose</button>
-					   		</span>
-						</div>
-				   	</div>
-					<!-- COMPONENT END -->
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary pull-right">Submit</button>
-						<button type="reset" class="btn btn-danger">Reset</button>
-					</div>
-				</form>
-				<h2>Data Example</h2>
-				<textarea class="form-control col-sm-7" rows="2" placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
-				<img src="C:\Users\dlsrk\eclipse-workspace\bootstrapEX\WebContent\img\img01.png" class="img-responsive" style="margin:0 auto; object-fit:container">
-	      </div>
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="SelectQI">
-        <div class="my-auto">
-          <br><br><br><br><br><br><br><br><h2 class="mb-5">Select Quasi-Identifier</h2>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              <a href="http://www.ehealthinformation.ca/faq/quasi-identifier/">What is quasi-identifier?</a><br><br>
-              <h3 class="mb-0">Attribute Header</h3>
-   	          
-	          <div class="checks">
-	          	<input type="checkbox" name="chk_info" value="HeaderA">DataA  
-			  	<input type="checkbox" name="chk_info" value="HeaderB">DataB 
-			  	<input type="checkbox" name="chk_info" value="HeaderC">DataC<br><br>
-	          </div>
-	          
-			  <button type="submit" class="btn btn-primary pull-right">Submit</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Taxonomy">
-        <div class="container">
-			<h2>Taxonomy Tree</h2>
-			<textarea class="form-control col-sm-6" rows="5"></textarea><br>
-			<textarea class="form-control col-sm-6" rows="5"></textarea><br>
-			<p></p>
-			<button type="submit" class="btn btn-primary pull-right" onclick="location.href='#Example'">Submit</button>
-		</div>
-		<div class="container">
-			<h2>Data Example</h2>
-			<img src="C:\Users\dlsrk\eclipse-workspace\bootstrapEX\WebContent\img\img02.png" class="img-responsive" style="margin:0 auto; object-fit:container">
-		</div>
-      </section>
-
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Example">
-        <div class="my-auto">
-          <h2 class="mb-5">Example</h2>
-          <p>Result from example data.<br>Then choose your K value.</p>
-        </div> 
-     	<div class="row">
-     		<div class="col-xs-12 col-md-6">
-     			<img src="C:\Users\dlsrk\eclipse-workspace\bootstrapEX\WebContent\img\img03.png" class="img-responsive" style="margin:0 auto; object-fit:container">
-     		</div>
-  			<div class="col-xs-6 col-md-6">
-  				<img src="C:\Users\dlsrk\eclipse-workspace\bootstrapEX\WebContent\img\img04.png" class="img-responsive" style="margin:0 auto; object-fit:container">
-  			</div>
-  			<div class="form-group">
-  					<p><br></p>
-					<button type="submit" class="btn btn-primary pull-right" onclick="getK()">Submit</button>
-			</div>
-     	</div>  
-      </section>
-	 
-      <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Review">
-        <div class="my-auto">
-          <h2 class="mb-5">Reivew &amp; Submit</h2>       	 
-       	 </div>
-       	 <div class="container">
-	       		<h2>Input File</h2>
-	       		<textarea class="form-control col-sm-7" rows="2" placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
-	     </div>
-	          
-	     <div class="container">
-	       		<h2>Generalization Lattice</h2>
-	       		<table style="width:70%;  text-align:center">
-					<tr style="background-color:lightgrey;">
-						<th>AGE</th>
-						<th>LENGTH</th>
-						<th>SURGERY</th>
-						<th>POST</th>
-						<th>GENDER</th>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>2</td>
-						<td>3</td>
-						<td>2</td>
-						<td>1</td>
-					</tr>
-				</table>
-	     </div>
-	          
-	     <div class="container">
-	       		<h2>k-Value</h2>
-	       		<table style="width:20%;  text-align:center">
-					<tr style="background-color:lightgrey;">
-						<th>K-Value</th>
-					</tr>
-					<tr>
-						<td>3</td>
-					</tr>
-				</table>
-	    </div>
-	    
-       	<div class="container">
-       			<p><br></p>
-				<button type="submit" class="btn btn-primary pull-right" onclick="submit()">Submit</button>
-		</div>
-		
-      </section>
-	
-	
-	  <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Download">
-        <div class="my-auto">
-         	 <h2 class="mb-5">Download</h2>       	 
-       	 </div>
-      		
-		<div class="container">
-	       		<h2>Result File</h2>
-	       		<textarea class="form-control col-sm-7" rows="2" placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
-	       		<p><br></p>
-	       		<button type="submit" class="btn btn-primary pull-right" onclick="download()">Download</button>
-	     </div>
-      </section>	
 		
 		
     </div>
+    <script type="text/javascript" src="/js/jquery.form.js"></script>
     
     <script type="text/javascript">
-    	function upload(){
-    		
-    	}
-    	function getK(){
-    		var k=prompt("What's your k-value?", "K");
-    		location.href='#Review';
-    	}
-    	function submit(){
-    		alert('Please wait for anonymizing Data...');
-    		location.href='#Download';
-    	}
-    	function download(){
-    		location.href="http://www.test.com/test.zip";
-    	}
-    </script>
+	    function handleFileSelect(evt) {
+			var files = evt.target.files; // FileList object
+	
+			// files is a FileList of File objects. List some properties.
+			var output = [];
+			for (var i = 0, f; f = files[i]; i++) {
+				output.push('<li><strong>', escape(f.name),
+						'</strong> (', f.type || 'n/a', ') - ',
+						f.size, ' bytes, last modified: ',
+						f.lastModifiedDate ? f.lastModifiedDate
+								.toLocaleDateString() : 'n/a',
+						'</li>');
+			}
+			document.getElementById('list').innerHTML = '<ul>'
+					+ output.join('') + '</ul>';
+		}
+	
+		document.getElementById('files').addEventListener('change',
+				handleFileSelect, false);
+		function getK() {
+			var k = prompt("What's your k-value?", "K");
+			location.href = '#Review';
+		}
+		function submit() {
+			alert('Please wait for anonymizing Data...');
+			location.href = '#Download';
+		}
+		function download() {
+			location.href = "http://www.test.com/test.zip";
+		}
+	</script>
+    
+					
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>

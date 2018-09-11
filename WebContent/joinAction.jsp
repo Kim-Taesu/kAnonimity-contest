@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="user.UserDTO" %>
-<%@ page import="user.UserDAO" %>
+<%@ page import="user.*" %>
 <%@ page import="java.io.PrintWriter" %>
-<%@ page import="user.User" %>
 <%@ page import="javax.servlet.http.HttpServletRequest" %> 
-<jsp:useBean id="user" class="user.User" scope="page" />
+<jsp:useBean id="user" class="user.UserDTO" scope="page" />
 <jsp:setProperty name="user" property="userID"/>
 <jsp:setProperty name="user" property="userPW"/>
 
