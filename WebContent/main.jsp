@@ -96,7 +96,7 @@
 		  %>
 				<p class="lead mb-5">Start this project!</p>
 				<form>
-					<button type="button" onclick="location.href='#Input'">Start</button>
+					<button type="button" onclick="location.href='dataInputPage.jsp'">Start</button>
 					<button type="button"  onclick="location.href='logoutAction.jsp'">Sign out</button>
 				</form>
 		  <%
