@@ -1,0 +1,197 @@
+package anonymity;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.Writer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+public class kAnonymity {
+
+	// kValue
+	private int KValue = 0;
+
+	// header value num
+	private int totalAttrSize = 0;
+
+	// Taxonomy data
+	private String genTreeFileName = "";
+
+	// Original data
+	private String inputFile_T1 = "";
+
+	private HashMap<String, Integer> maxMap = new HashMap<String, Integer>();
+	private HashMap<String, ArrayList<Integer>> rangeMap = new HashMap<String, ArrayList<Integer>>();
+	private ArrayList<String> projectionList = new ArrayList<String>();
+	private ArrayList<ArrayList> tupleList_T1 = new ArrayList<ArrayList>();
+	private ArrayList<String> transfromed_tupleList_T1 = new ArrayList<String>();
+
+	public void loadGenTree() {
+		System.out.println("loadGenTree Start!!!!");
+		System.out.println("genTreeFileName : " + this.genTreeFileName);
+		StringTokenizer lineToken = new StringTokenizer(this.genTreeFileName, "\n");
+		while (lineToken.hasMoreTokens()) {
+			String label = lineToken.nextToken();
+
+			StringTokenizer st = new StringTokenizer(label, "|");
+			String attrName = st.nextElement().toString();
+			Integer treeLevel = new Integer(st.nextElement().toString());
+			String valueStr = st.nextElement().toString();
+
+			// update min and max
+			Integer curMax = this.maxMap.get(attrName);
+			if (curMax == null)
+				this.maxMap.put(attrName, treeLevel);
+			else if (curMax.intValue() < treeLevel.intValue())
+				this.maxMap.put(attrName, treeLevel);
+
+			// insert range list
+			ArrayList<Integer> tempArr = new ArrayList<Integer>();
+
+			StringTokenizer valueStr_st = new StringTokenizer(valueStr, "_");
+
+			while (valueStr_st.hasMoreTokens()) {
+				String line = valueStr_st.nextToken();
+				if (!valueStr_st.hasMoreElements()) {
+					int lineEnd = line.length();
+					line = line.substring(0, lineEnd - 1);
+				}
+
+				tempArr.add(Integer.parseInt(line));
+
+			}
+
+			this.rangeMap.put(attrName + "-" + treeLevel, tempArr);
+		}
+
+		System.out.println("maxMap : " + maxMap);
+		System.out.println("rangeMap : " + rangeMap);
+		System.out.println("loadGenTree Finish!!\n\n");
+
+	}
+
+	private ArrayList<Integer> fitNode;
+
+	public kAnonymity(String Taxonomy, String header, String dataFilePath) {
+		StringTokenizer headerToken = new StringTokenizer(header, "|");
+
+		while (headerToken.hasMoreElements()) {
+			this.projectionList.add(headerToken.nextToken());
+		}
+
+		this.genTreeFileName = Taxonomy;
+		this.inputFile_T1 = dataFilePath;
+
+		System.out.println(this.inputFile_T1);
+	}
+
+	public void loadData(String inputFileName, ArrayList<ArrayList> curTupleList) {
+		System.out.println("loadData Start!!");
+		try {
+			FileInputStream stream = new FileInputStream(inputFileName);
+			InputStreamReader reader = new InputStreamReader(stream);
+			BufferedReader buffer = new BufferedReader(reader);
+
+			int curCount = 0;
+			while (true) {
+				String label = buffer.readLine();
+				if (label == null)
+					break;
+
+				ArrayList curTuple = new ArrayList();
+				StringTokenizer st = new StringTokenizer(label, "|");
+
+				for (int i = 0; i < this.projectionList.size(); ++i)
+					curTuple.add(new Integer(st.nextToken()));
+				curTupleList.add(curTuple);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("loadData Finish!!\n\n");
+	}
+
+	public void performGeneralization(ArrayList<Integer> curNode, ArrayList<ArrayList> curTupleList,
+			ArrayList<String> transfromed_curTupleList) {
+
+		System.out.println("curTupleList : " + curTupleList);
+		int attrNumber = this.projectionList.size();
+		System.out.println("projectionList : " + projectionList);
+		HashMap<String, ArrayList<String>> anonymizedResult = new HashMap<String, ArrayList<String>>();
+
+		for (int i = 0; i < curTupleList.size(); ++i) {
+			ArrayList curTuple = curTupleList.get(i);
+
+			String tranformedStr = new String();
+			for (int k = 0; k < attrNumber; ++k) {
+
+				String attrName = this.projectionList.get(k);
+				int treeLevel = curNode.get(k).intValue();
+				int curAttrValue = ((Integer) curTuple.get(k)).intValue();
+
+				if (treeLevel > 0) {
+					ArrayList<Integer> curRangeList = this.rangeMap.get(attrName + "-" + treeLevel);
+
+					if (curRangeList.size() == 2) {
+						tranformedStr = tranformedStr + "|" + curRangeList.get(0) + "_" + curRangeList.get(1);
+					} else {
+						for (int m = 0; m < curRangeList.size() - 1; ++m) {
+							int curMin = curRangeList.get(m);
+							int curMax = curRangeList.get(m + 1);
+
+							if ((curMin <= curAttrValue) && (curAttrValue <= curMax)) {
+								tranformedStr = tranformedStr + "|" + curMin + "_" + curMax;
+								break;
+							}
+						}
+					}
+				} else {
+
+					tranformedStr = tranformedStr + "|" + curAttrValue;
+				}
+			}
+
+			transfromed_curTupleList.add(tranformedStr);
+
+		}
+
+	}
+
+	//
+	public void performAnonymity() {
+
+		ArrayList<Integer> middleGL = new ArrayList<Integer>();
+
+		for (int i = 0; i < maxMap.keySet().size(); i++) {
+			int middleLevel = maxMap.get(projectionList.get(i)) / 2;
+			middleGL.add(middleLevel);
+		}
+
+		System.out.println("middleGL : " + middleGL);
+		performGeneralization(middleGL, this.tupleList_T1, this.transfromed_tupleList_T1);
+
+	}
+
+	public String run() {
+		loadGenTree();
+		loadData(this.inputFile_T1, this.tupleList_T1);
+		performAnonymity();
+		System.out.println(transfromed_tupleList_T1);
+		return KValue + "\n";
+	}
+
+	// main part
+	public static void main(String[] args) {
+	}
+
+}
