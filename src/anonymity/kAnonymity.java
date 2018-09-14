@@ -187,7 +187,7 @@ public class kAnonymity {
 		loadData(this.inputFile_T1, this.tupleList_T1);
 		performAnonymity();
 		System.out.println(transfromed_tupleList_T1);
-		return KValue + "\n";
+		return transfromed_tupleList_T1.toString() + "\n";
 	}
 
 	// main part

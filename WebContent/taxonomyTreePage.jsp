@@ -79,7 +79,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-md-6">
 				<h2>Taxonomy Tree</h2>
-				<form action="example.jsp" method="post">
+				<form action="examplePage.jsp" method="post">
 					<textarea name="taxonomy" cols="50" rows="15"></textarea>
 					<br> <input type="submit" value="Sampling Start!">
 				</form>
@@ -88,7 +88,7 @@
 			<div class="col-xs-3 col-md-6">
 				<h2>Data Example</h2>
 				<img
-					src="C:\\Users\\Taesu Kim\\Desktop\\태수\\웹서버\\LG_PROJECT\\kAnonimity\\WebContent\img\\taxonomy.png"
+					src="/home/hp/eclipse-web/git_jwkim/kAnonimity/WebContent/img/profile.jpg"
 					class="img-responsive"
 					style="margin: 0 auto; object-fit: container">
 			</div>

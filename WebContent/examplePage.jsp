@@ -43,13 +43,14 @@
 		String header = "age|sex|surgery|length|temp|location";
 
 		//String originalData = request.getParameter("originalData");
-		String originalData = "C:\\Users\\Taesu Kim\\eclipse-workspace\\web_test\\data\\t1_resizingBy_100.txt";
+		String originalData = "/home/hp/data/t1_resizingBy_100.txt";
 
 		long start = System.currentTimeMillis();
 
 		//kAnonymity(String Taxonomy, String header, int Kvalue, String dataFilePath)
 		kAnonymity mykAnonymity = new kAnonymity(taxonomy, header, originalData);
 		String result = mykAnonymity.run();
+		System.out.println("result : " + result);
 		System.out.println("***** Done ***** ");
 		long end = System.currentTimeMillis();
 
