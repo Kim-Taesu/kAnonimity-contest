@@ -52,22 +52,22 @@
             <a class="nav-link js-scroll-trigger" href="main.jsp">Start</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="dataInputPage.jsp">Data Input</a>
+            <a class="nav-link js-scroll-trigger" href="dataInput.jsp">Data Input</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="quasiIdentifierPage.jsp">Quasi-Identifier</a>
+            <a class="nav-link js-scroll-trigger" href="quasiIdentifier.jsp">Quasi-Identifier</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="taxonomyTreePage.jsp">Taxonomy tree</a>
+            <a class="nav-link js-scroll-trigger" href="taxonomyTree.jsp">Taxonomy tree</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="examplePage.jsp">Example</a>
+            <a class="nav-link js-scroll-trigger" href="example.jsp">Example</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="reviewPage.jsp">Review</a>
+            <a class="nav-link js-scroll-trigger" href="review.jsp">Review</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Download</a>
+            <a class="nav-link js-scroll-trigger" href="download.jsp">Download</a>
           </li>
         </ul>
       </div>

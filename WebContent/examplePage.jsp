@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="anonymity.kAnonymity"%>
+<%@ page import="anonymity.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,16 +34,14 @@
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
-	%>
 
-	<%
 		String taxonomy = request.getParameter("taxonomy");
 
-		//String header = request.getParameter("header");
-		String header = "age|sex|surgery|length|temp|location";
+		String header = request.getParameter("res");
 
-		//String originalData = request.getParameter("originalData");
-		String originalData = "/home/hp/data/t1_resizingBy_100.txt";
+		String originalData = request.getParameter("originalData");
+
+		System.out.println("tax : " + taxonomy + "\nhead : " + header + "\noriData : " + originalData);
 
 		long start = System.currentTimeMillis();
 
@@ -75,17 +73,17 @@
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="main.jsp">Start</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="dataInput.jsp">Data Input</a></li>
+					href="dataInputPage.jsp">Data Input</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="quasiIdentifier.jsp">Quasi-Identifier</a></li>
+					href="quasiIdentifierPage.jsp">Quasi-Identifier</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="taxonomyTree.jsp">Taxonomy tree</a></li>
+					href="taxonomyTreePage.jsp">Taxonomy tree</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="example.jsp">Example</a></li>
+					href="examplePage.jsp">Example</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="review.jsp">Review</a></li>
+					href="reviewPage.jsp">Review</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="download.jsp">Download</a></li>
+					href="downloadPage.jsp">Download</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -109,20 +107,16 @@
 				<h4 class="mb-5">Enter the value of k.</h4>
 				<label for="name">k Value :</label> <input type="text" id="kValue" />
 				<button type="submit" class="btn btn-primary pull-right"
-				onclick="getK()">Submit</button>
+					onclick="getK()">Submit</button>
 			</div>
 		</div>
 		<div class="form-group">
 			<p>
 				<br>
 			</p>
-			
+
 		</div>
 	</section>
+
 </body>
-
-
-
-
-
 </html>

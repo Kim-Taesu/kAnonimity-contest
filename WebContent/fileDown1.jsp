@@ -16,7 +16,7 @@
 	String fileName = request.getParameter("file_name");
 
 	// 업로드한 폴더의 위치와 업로드 폴더의 이름을 알아야 한다.
-	String savePath = "Upload"; // WebContent/uploadFile
+	String savePath = "uploadFile"; // WebContent/uploadFile
 	// 위의 폴더는 상대경로이고 절대경로 기준의 진짜 경로를 구해와야한다.
 	String sDownPath = request.getRealPath(savePath);
 

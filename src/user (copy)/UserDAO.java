@@ -5,13 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
+import util.DatabaseUtil;
+ 
  
 public class UserDAO {
     
-    private Connection conn;            // DB에 접근하는 객체
-    private PreparedStatement pstmt;    // 
-    private ResultSet rs;                // DB data를 담을 수 있는 객체  (Ctrl + shift + 'o') -> auto import
+    private Connection conn;           
+    private PreparedStatement pstmt;   
+    private ResultSet rs;                
     
     public UserDAO(){
         try {
@@ -27,18 +28,18 @@ public class UserDAO {
         
     }
     
-    public int join(UserDTO userDTO) {
+    public int join(User user) {
     	StringBuffer sb = new StringBuffer();
  
     	String SQL = "insert into user(userID, userPW) values(";
     	
     	sb.append(SQL);
     	sb.append("'");
-    	sb.append(userDTO.getUserID());
+    	sb.append(user.getUserID());
     	sb.append("'");
     	sb.append(",");
     	sb.append("'");
-    	sb.append(userDTO.getUserPW());
+    	sb.append(user.getUserPW());
     	sb.append("'");
     	sb.append(")");
     	System.out.println(sb);
@@ -55,6 +56,7 @@ public class UserDAO {
     }
     
     public int login(String userID, String userPW) {
+    	System.out.println("LOGIN!!!!!!!!!!!!!!!!!!!!!!");
         String SQL = "SELECT userPW FROM user WHERE userID = ?";
         try {
             pstmt = conn.prepareStatement(SQL);
@@ -62,16 +64,16 @@ public class UserDAO {
             rs = pstmt.executeQuery();
             if(rs.next()){
                 if(rs.getString(1).equals(userPW))
-                    return 1;    // 로그인 성공
+                    return 1;    
                 else
-                    return 0; // 비밀번호 불일치
+                    return 0; // 
             }
-            return -1; // ID가 없음
+            return -1; // 
             
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -2; // DB 오류
+        return -2; // 
         
     }
  

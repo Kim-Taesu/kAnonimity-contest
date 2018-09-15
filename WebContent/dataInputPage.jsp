@@ -75,7 +75,7 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Input">
 	      <div class="container">
-	      		<h2>Select your data</h2>	      	
+	      		<h2>Select your data (*.csv)</h2>	      	
 		      	
 		      	<form method="POST" action="fileUpload.jsp" enctype="multipart/form-data">
 					<!-- COMPONENT START -->
@@ -94,7 +94,7 @@
 
 				<h2>Data Example</h2>
 				<textarea class="form-control col-sm-7" rows="2" placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
-				<img src="C:\Users\dlsrk\eclipse-workspace\bootstrapEX\WebContent\img\img01.png" class="img-responsive" style="margin:0 auto; object-fit:container">
+				<img src="/home/hp/eclipse-web/SWDevelopment/WebContent/img/img01.PNG" class="img-responsive" style="margin:0 auto; object-fit:container">
 	      </div>
       </section>
 

@@ -12,21 +12,20 @@ fileCheck jsp페이지
 	// post방식에 대한 한글 인코딩 방식 지정 get방식은 서버의 server.xml에서 Connector태그에 URIEncoding="UTF-8" 추가
 	request.setCharacterEncoding("UTF-8");
 
-	// input type="name" 의 value값을 가져옴
-	String name = request.getParameter("name");
-	// input type="subject" 의 value값을 가져옴
-	String subject = request.getParameter("subject");
+	
 	// 중복방지용으로 만들어져 넘겨진 파일명을 가져옴
 	String fileName1 = request.getParameter("fileName1");
 	// 본래의 파일명을 가져옴
 	String originalName1 = request.getParameter("originalName1");
+	
+	String header = request.getParameter("header");
+	
+	String originalData = request.getParameter("originalData");
+
 %>
 
 <h3>업로드 파일 확인</h3>
-올린 사람 :
-<%=name%><br />
-제목 :
-<%=subject%><br />
+
 
 <!-- 파일 다운로드 링크 클릭시 다운로드 될 수 있도록 fileDown1.jsp 페이지에서 처리 뒤에 쿼리문자열을 통해 중복 방지용 이름 fileName1 값을 같이 넘겨준다. -->
 파일1 다운로드 :
@@ -43,4 +42,13 @@ fileCheck jsp페이지
 		window.location.href = "fileDown1.jsp?file_name=" + fName;
 	});
 </script>
+<br>
 
+<form action="quasiIdentifierPage.jsp" method="post" name="sendHeaderInfo">
+	<input type="hidden" value="<%=fileName1%>" name="fileName1" /> 
+	<input type="hidden" value="<%=originalName1%>" name="originalName1" />
+	<input type="hidden" value="<%=header%>" name="header"/>
+	<input type="hidden" value="<%=originalData %>" name="originalData"/>
+</form>
+
+<a href="#" onclick="javascript:document.sendHeaderInfo.submit()">Next Step!</a>

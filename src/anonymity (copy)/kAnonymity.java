@@ -37,14 +37,15 @@ public class kAnonymity {
 
 	public void loadGenTree() {
 		System.out.println("loadGenTree Start!!!!");
+		System.out.println("genTreeFileName : " + this.genTreeFileName);
 		StringTokenizer lineToken = new StringTokenizer(this.genTreeFileName, "\n");
 		while (lineToken.hasMoreTokens()) {
 			String label = lineToken.nextToken();
+
 			StringTokenizer st = new StringTokenizer(label, "|");
 			String attrName = st.nextElement().toString();
 			Integer treeLevel = new Integer(st.nextElement().toString());
 			String valueStr = st.nextElement().toString();
-			valueStr.substring(0, valueStr.length() - 1);
 
 			// update min and max
 			Integer curMax = this.maxMap.get(attrName);
@@ -56,29 +57,20 @@ public class kAnonymity {
 			// insert range list
 			ArrayList<Integer> tempArr = new ArrayList<Integer>();
 
-			// if(!lineToken.hasMoreElements()) valueStr.substring(0, valueStr.length()-1);
-
 			StringTokenizer valueStr_st = new StringTokenizer(valueStr, "_");
-
-			//System.out.println("label : " + label);
-			//System.out.println("valueStr : " + valueStr + "\n" + "valueStr length : " + valueStr.length());
 
 			while (valueStr_st.hasMoreTokens()) {
 				String line = valueStr_st.nextToken();
-				if (!valueStr_st.hasMoreElements() && lineToken.hasMoreElements()) {
-					//System.out.println("!!");
+				if (!valueStr_st.hasMoreElements()) {
 					int lineEnd = line.length();
 					line = line.substring(0, lineEnd - 1);
 				}
 
-				//System.out.println("line : " + line + ", length : " + line.length());
 				tempArr.add(Integer.parseInt(line));
-				//System.out.println("tempArr : " + tempArr);
 
 			}
 
 			this.rangeMap.put(attrName + "-" + treeLevel, tempArr);
-			//System.out.println("!!rangeMap : " + rangeMap + "\n");
 		}
 
 		System.out.println("maxMap : " + maxMap);
@@ -109,41 +101,17 @@ public class kAnonymity {
 			InputStreamReader reader = new InputStreamReader(stream);
 			BufferedReader buffer = new BufferedReader(reader);
 
-			// pass header
-			String[] temp = buffer.readLine().split(",");
-
-			ArrayList<Integer> headerInt = new ArrayList<Integer>();
-
-			System.out.println("projectionList : " + projectionList);
-
-			for (int i = 0; i < this.projectionList.size(); i++) {
-				for (int j = 0; i < temp.length; j++) {
-					System.out.println(i + ",  " + j);
-					if (this.projectionList.get(i).equals(temp[j])) {
-						headerInt.add(j);
-						break;
-					}
-				}
-			}
-
-			System.out.println("headerInt : " + headerInt);
-
 			int curCount = 0;
 			while (true) {
-				String[] label = buffer.readLine().split(",");
+				String label = buffer.readLine();
 				if (label == null)
 					break;
 
 				ArrayList curTuple = new ArrayList();
+				StringTokenizer st = new StringTokenizer(label, "|");
 
-				for (int i = 0; i < headerInt.size(); i++) {
-					curTuple.add(new Integer(label[headerInt.get(i)]));
-				}
-
-				// System.out.println("curTuple : " + curTuple);
-
-				// for (int i = 0; i < this.projectionList.size(); ++i)
-				// curTuple.add(new Integer(st.nextToken()));
+				for (int i = 0; i < this.projectionList.size(); ++i)
+					curTuple.add(new Integer(st.nextToken()));
 				curTupleList.add(curTuple);
 
 			}
