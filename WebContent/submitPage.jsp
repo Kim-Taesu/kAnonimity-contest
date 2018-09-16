@@ -31,18 +31,7 @@
 <link href="css/resume.min.css" rel="stylesheet">
 </head>
 <body>
-	<%
-		String userID = null;
-		if (session.getAttribute("userID") != null) {
-			userID = (String) session.getAttribute("userID");
-		}
 
-		String taxonomy = request.getParameter("taxonomy");
-		String filePath = request.getParameter("originalData");
-		String[] originalData_Temp = filePath.split("/");
-		String originalData = originalData_Temp[originalData_Temp.length - 1];
-		String kValue = request.getParameter("kValue");
-	%>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
 		id="sideNav">
@@ -82,32 +71,64 @@
 	<section class="resume-section p-3 p-lg-5 d-flex flex-column"
 		id="Review">
 		<div class="my-auto">
-			<h2 class="mb-5">Reivew Your Setting</h2>
+			<h2 class="mb-5">Submit</h2>
 		</div>
-
-
+		
 		<div class="row">
 
 			<div class="col-xs-12 col-md-6">
-				<h4 class="mb-5">Data Input (Your Data)</h4>
-				<div class="row-xs-12 row-md-6">
-					<textarea class="form-control col-sm-7" rows="2"
-						placeholder=<%=originalData%>></textarea>
+				<h4>Load data to HDFS</h4>
+			<%
+			String userID = null;
+			if (session.getAttribute("userID") != null) {
+				userID = (String) session.getAttribute("userID");
+			}
 
-					<br> <br>
-				</div>
+			String taxonomy = request.getParameter("taxonomy");
+			String filePath = request.getParameter("originalData");
+			System.out.println("filePath : " + filePath);
+			String[] originalData_Temp = filePath.split("/");
+			String originalData = originalData_Temp[originalData_Temp.length - 1];
+			String kValue = request.getParameter("kValue");
+			
+			//spark-submit --class com.kAnonymity_maven.kAnonymity_spark 
+			//--master yarn 
+			//--deploy-mode cluster 
+			//--driver-memory 10g 
+			//--executor-memory 10g 
+			//		--executor-cores 4 
+			//hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar 100 hdfs:///home/hp/data/inputFile_5G.txt 0 10
+			/*
+			String cmd = "hadoop fs -put " + filePath + " /lgproject/ ";
+			
+			String cmd2 = "spark-submit --class com.kAnonymity_maven.kAnonymity_spark --master yarn --deploy-mode cluster --driver-memory 10g --executor-memory 10g --executor-cores 4 "
+					+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar 100 hdfs:///home/hp/data/inputFile_5G.txt 0 10";
+			*/
+			String cmd2 = "spark-submit --class com.kAnonymity_maven.WordCount --master yarn --deploy-mode cluster --driver-memory 10g --executor-memory 10g --executor-cores 4 "
+					+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar hdfs:///home/hp/data/inputFile.txt" + " hdfs:///lgoutput";
+			
+			Runtime rt = Runtime.getRuntime();
+			Process ps = null;
+			String line = "";
 
-				<h4 class="mb-5">K Value (Equivalent class num)</h4>
-				<div class="row-xs-6 row-md-6">
-					<textarea class="form-control col-sm-7" rows="2" placeholder=><%=kValue%></textarea>
+			try {
+				ps = rt.exec(cmd2);
+				BufferedReader br = new BufferedReader(
+						new InputStreamReader(new SequenceInputStream(ps.getInputStream(), ps.getErrorStream())));
+				while ((line = br.readLine()) != null) {
+		%>
+		<%=line%><br>
+		<!-- 결과 화면에 뿌리기... -->
+		<%
+			}
+				br.close();
 
-				</div>
-				<br> <br> <br>
-				<form method="post" action="submitPage.jsp">
-					<input type="hidden" value="<%=taxonomy%>" name="taxonomy" /> <input
-						type="hidden" value="<%=filePath%>" name="originalData" />
-					<button type="submit" class="btn btn-danger" onclick="submit()">Submit</button>
-				</form>
+			} catch (IOException ie) {
+				ie.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		%>
 
 			</div>
 
@@ -115,13 +136,16 @@
 			<div class="col-xs-6 col-md-6">
 
 				<h4>Taxonomy Tree</h4>
-				<textarea class="form-control col-sm-6" cols="100" rows="20"
-					name="taxonomy"><%=taxonomy%></textarea>
 
 
 			</div>
 		</div>
+
+		
+		</div>
 	</section>
+
+
 
 </body>
 </html>
