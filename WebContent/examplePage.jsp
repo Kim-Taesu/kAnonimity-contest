@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="anonymity.*"%>
+<%@ page import="anonymity.kAnonymity"%>
+<%@ page import="java.util.HashMap"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +51,9 @@
 		//kAnonymity(String Taxonomy, String header, int Kvalue, String dataFilePath)
 		kAnonymity mykAnonymity = new kAnonymity(taxonomy, header, originalData);
 		String result = mykAnonymity.run();
+		HashMap<String, Integer> equivalent = new HashMap<String, Integer>() ;
+		
+		//HashMap<String, Integer> equivalent = mykAnonymity.equivalent();
 		System.out.println("result : " + result);
 		System.out.println("***** Done ***** ");
 		long end = System.currentTimeMillis();
@@ -98,23 +104,45 @@
 				Result from example data.<br>Then choose your K value.
 			</p>
 		</div>
+
+
 		<div class="row">
 			<div class="col-xs-12 col-md-6">
-				<h4 class="mb-5">Example</h4>
-				<%=result%>
-			</div>
-			<div class="col-xs-6 col-md-6">
-				<h4 class="mb-5">Enter the value of k.</h4>
-				<label for="name">k Value :</label> <input type="text" id="kValue" />
-				<button type="submit" class="btn btn-primary pull-right"
-					onclick="getK()">Submit</button>
-			</div>
-		</div>
-		<div class="form-group">
-			<p>
-				<br>
-			</p>
+				<h4 class="mb-5">Sampling Data</h4>
+				<div class="row-xs-12 row-md-6">
+					<textarea id="inputbox" cols="70" rows="10"><%=result%></textarea>
+					<br> <br>
+				</div>
 
+				<h4 class="mb-5">Sample Data's Equivalent Class</h4>
+				<div class="row-xs-6 row-md-6">
+					<textarea id="inputbox" cols="70" rows="10"><%=equivalent%></textarea>
+				</div>
+
+
+			</div>
+
+
+			<div class="col-xs-6 col-md-6">
+
+				<div class="row-xs-12 row-md-6"></div>
+				<h4 class="mb-5">What is the Equivalent Class??</h4>
+				<textarea id="inputbox" cols="80" rows="10">
+Congruence is an example of an equivalence relation. The leftmost two triangles are congruent, while the third and fourth triangles are not congruent to any other triangle shown here. Thus, the first two triangles are in the same equivalence class, while the third and fourth triangles are each in their own equivalence class.
+In mathematics, when the elements of some set S have a notion of equivalence (formalized as an equivalence relation) defined on them, then one may naturally split the set S into equivalence classes. These equivalence classes are constructed so that elements a and b belong to the same equivalence class if and only if a and b are equivalent.
+
+Formally, given a set S and an equivalence relation ~ on S, the equivalence class of an element a in S is the set</textarea>
+
+				<div class="row-xs-6 row-md-6">
+				 <br>
+					<h4 class="mb-5">Enter the value of k. (Equivalent Class's num)</h4>
+					<label for="name">k Value :</label> <input type="text" id="kValue" />
+					<button type="submit" class="btn btn-primary pull-right"
+						onclick="getK()">Next</button>
+				</div>
+
+
+			</div>
 		</div>
 	</section>
 

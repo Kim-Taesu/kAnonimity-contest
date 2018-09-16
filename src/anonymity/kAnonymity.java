@@ -35,6 +35,8 @@ public class kAnonymity {
 	private ArrayList<ArrayList> tupleList_T1 = new ArrayList<ArrayList>();
 	private ArrayList<String> transfromed_tupleList_T1 = new ArrayList<String>();
 
+	HashMap<String, Integer> equivalentClass = new HashMap<String, Integer>();
+
 	public void loadGenTree() {
 		System.out.println("loadGenTree Start!!!!");
 		StringTokenizer lineToken = new StringTokenizer(this.genTreeFileName, "\n");
@@ -60,25 +62,26 @@ public class kAnonymity {
 
 			StringTokenizer valueStr_st = new StringTokenizer(valueStr, "_");
 
-			//System.out.println("label : " + label);
-			//System.out.println("valueStr : " + valueStr + "\n" + "valueStr length : " + valueStr.length());
+			// System.out.println("label : " + label);
+			// System.out.println("valueStr : " + valueStr + "\n" + "valueStr length : " +
+			// valueStr.length());
 
 			while (valueStr_st.hasMoreTokens()) {
 				String line = valueStr_st.nextToken();
 				if (!valueStr_st.hasMoreElements() && lineToken.hasMoreElements()) {
-					//System.out.println("!!");
+					// System.out.println("!!");
 					int lineEnd = line.length();
 					line = line.substring(0, lineEnd - 1);
 				}
 
-				//System.out.println("line : " + line + ", length : " + line.length());
+				// System.out.println("line : " + line + ", length : " + line.length());
 				tempArr.add(Integer.parseInt(line));
-				//System.out.println("tempArr : " + tempArr);
+				// System.out.println("tempArr : " + tempArr);
 
 			}
 
 			this.rangeMap.put(attrName + "-" + treeLevel, tempArr);
-			//System.out.println("!!rangeMap : " + rangeMap + "\n");
+			// System.out.println("!!rangeMap : " + rangeMap + "\n");
 		}
 
 		System.out.println("maxMap : " + maxMap);
@@ -192,7 +195,11 @@ public class kAnonymity {
 					tranformedStr = tranformedStr + "|" + curAttrValue;
 				}
 			}
-
+			if (!equivalentClass.containsKey(tranformedStr)) {
+				equivalentClass.put(tranformedStr, 1);
+			} else {
+				equivalentClass.put(tranformedStr, equivalentClass.get(tranformedStr) + 1);
+			}
 			transfromed_curTupleList.add(tranformedStr);
 
 		}
@@ -212,6 +219,10 @@ public class kAnonymity {
 		System.out.println("middleGL : " + middleGL);
 		performGeneralization(middleGL, this.tupleList_T1, this.transfromed_tupleList_T1);
 
+	}
+
+	public HashMap<String, Integer> equivalent(){
+		return equivalentClass;
 	}
 
 	public String run() {
