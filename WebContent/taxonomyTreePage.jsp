@@ -89,7 +89,7 @@
 			<div class="col-xs-12 col-md-6">
 				<h4>Data Example</h4>
 				<img
-					src="/home/hp/eclipse-web/SWDevelopment/WebContent/img/img02.PNG"
+					src="/WebContent/img/taxonomy.png"
 					class="img-responsive" width="500"
 					style="margin: 0 auto; object-fit: container">
 			</div>

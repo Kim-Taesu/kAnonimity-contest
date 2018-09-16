@@ -84,8 +84,8 @@ public class kAnonymity {
 			// System.out.println("!!rangeMap : " + rangeMap + "\n");
 		}
 
-		System.out.println("maxMap : " + maxMap);
-		System.out.println("rangeMap : " + rangeMap);
+//		System.out.println("maxMap : " + maxMap);
+//		System.out.println("rangeMap : " + rangeMap);
 		System.out.println("loadGenTree Finish!!\n\n");
 
 	}
@@ -102,7 +102,7 @@ public class kAnonymity {
 		this.genTreeFileName = Taxonomy;
 		this.inputFile_T1 = dataFilePath;
 
-		System.out.println(this.inputFile_T1);
+//		System.out.println(this.inputFile_T1);
 	}
 
 	public void loadData(String inputFileName, ArrayList<ArrayList> curTupleList) {
@@ -117,11 +117,11 @@ public class kAnonymity {
 
 			ArrayList<Integer> headerInt = new ArrayList<Integer>();
 
-			System.out.println("projectionList : " + projectionList);
+//			System.out.println("projectionList : " + projectionList);
 
 			for (int i = 0; i < this.projectionList.size(); i++) {
 				for (int j = 0; i < temp.length; j++) {
-					System.out.println(i + ",  " + j);
+//					System.out.println(i + ",  " + j);
 					if (this.projectionList.get(i).equals(temp[j])) {
 						headerInt.add(j);
 						break;
@@ -129,7 +129,7 @@ public class kAnonymity {
 				}
 			}
 
-			System.out.println("headerInt : " + headerInt);
+//			System.out.println("headerInt : " + headerInt);
 
 			int curCount = 0;
 			while (true) {
@@ -159,9 +159,9 @@ public class kAnonymity {
 	public void performGeneralization(ArrayList<Integer> curNode, ArrayList<ArrayList> curTupleList,
 			ArrayList<String> transfromed_curTupleList) {
 
-		System.out.println("curTupleList : " + curTupleList);
+//		System.out.println("curTupleList : " + curTupleList);
 		int attrNumber = this.projectionList.size();
-		System.out.println("projectionList : " + projectionList);
+//		System.out.println("projectionList : " + projectionList);
 		HashMap<String, ArrayList<String>> anonymizedResult = new HashMap<String, ArrayList<String>>();
 
 		for (int i = 0; i < curTupleList.size(); ++i) {
@@ -216,7 +216,7 @@ public class kAnonymity {
 			middleGL.add(middleLevel);
 		}
 
-		System.out.println("middleGL : " + middleGL);
+//		System.out.println("middleGL : " + middleGL);
 		performGeneralization(middleGL, this.tupleList_T1, this.transfromed_tupleList_T1);
 
 	}
@@ -229,7 +229,7 @@ public class kAnonymity {
 		loadGenTree();
 		loadData(this.inputFile_T1, this.tupleList_T1);
 		performAnonymity();
-		System.out.println(transfromed_tupleList_T1);
+		System.out.println(equivalentClass);
 		return transfromed_tupleList_T1.toString() + "\n";
 	}
 

@@ -94,7 +94,7 @@
 
 				<h2>Data Example</h2>
 				<textarea class="form-control col-sm-7" rows="2" placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
-				<img src="/home/hp/eclipse-web/SWDevelopment/WebContent/img/img01.PNG" class="img-responsive" style="margin:0 auto; object-fit:container">
+				<img src="/WebContent/img/img01.PNG" class="img-responsive" style="margin:0 auto; object-fit:container">
 	      </div>
       </section>
 

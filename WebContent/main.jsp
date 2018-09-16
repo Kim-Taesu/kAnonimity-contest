@@ -88,16 +88,16 @@
 		  %>
 	          <p class="lead mb-5">Please sign in or up to start this project.</p>
 			  <form>
-			  		<button type="button"  onclick="location.href='login.jsp'">Sign in</button>
-			  		<button type="button"  onclick="location.href='join.jsp'">Sign up</button>
+			  		<button type="button" class="btn btn-primary" onclick="location.href='login.jsp'">Sign in</button>
+			  		<button type="button" class="btn btn-primary" onclick="location.href='join.jsp'">Sign up</button>
 			  </form>  
 		  <%
 			  }else{
 		  %>
 				<p class="lead mb-5">Start this project!</p>
 				<form>
-					<button type="button" onclick="location.href='dataInputPage.jsp'">Start</button>
-					<button type="button"  onclick="location.href='logoutAction.jsp'">Sign out</button>
+					<button type="button" class="btn btn-primary pull-right" onclick="location.href='dataInputPage.jsp'">Start</button>
+					<button type="button"  class="btn btn-danger" onclick="location.href='logoutAction.jsp'">Sign out</button>
 				</form>
 		  <%
 			  }

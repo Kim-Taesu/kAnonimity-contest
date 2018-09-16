@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class kAnonymity {
+public class kAnonymity2 {
 
 	// kValue
 	private int KValue = 0;
@@ -35,16 +35,18 @@ public class kAnonymity {
 	private ArrayList<ArrayList> tupleList_T1 = new ArrayList<ArrayList>();
 	private ArrayList<String> transfromed_tupleList_T1 = new ArrayList<String>();
 
+	HashMap<String, Integer> equivalentClass = new HashMap<String, Integer>();
+
 	public void loadGenTree() {
-		System.out.println("loadGenTree Start!!");
+		System.out.println("loadGenTree Start!!!!");
 		StringTokenizer lineToken = new StringTokenizer(this.genTreeFileName, "\n");
 		while (lineToken.hasMoreTokens()) {
 			String label = lineToken.nextToken();
-
 			StringTokenizer st = new StringTokenizer(label, "|");
 			String attrName = st.nextElement().toString();
 			Integer treeLevel = new Integer(st.nextElement().toString());
 			String valueStr = st.nextElement().toString();
+			valueStr.substring(0, valueStr.length() - 1);
 
 			// update min and max
 			Integer curMax = this.maxMap.get(attrName);
@@ -56,31 +58,41 @@ public class kAnonymity {
 			// insert range list
 			ArrayList<Integer> tempArr = new ArrayList<Integer>();
 
+			// if(!lineToken.hasMoreElements()) valueStr.substring(0, valueStr.length()-1);
+
 			StringTokenizer valueStr_st = new StringTokenizer(valueStr, "_");
+
+			// System.out.println("label : " + label);
+			// System.out.println("valueStr : " + valueStr + "\n" + "valueStr length : " +
+			// valueStr.length());
 
 			while (valueStr_st.hasMoreTokens()) {
 				String line = valueStr_st.nextToken();
-				if (!valueStr_st.hasMoreElements()) {
+				if (!valueStr_st.hasMoreElements() && lineToken.hasMoreElements()) {
+					// System.out.println("!!");
 					int lineEnd = line.length();
 					line = line.substring(0, lineEnd - 1);
 				}
 
+				// System.out.println("line : " + line + ", length : " + line.length());
 				tempArr.add(Integer.parseInt(line));
+				// System.out.println("tempArr : " + tempArr);
 
 			}
 
 			this.rangeMap.put(attrName + "-" + treeLevel, tempArr);
+			// System.out.println("!!rangeMap : " + rangeMap + "\n");
 		}
 
-		System.out.println("maxMap : " + maxMap);
-		System.out.println("rangeMap : " + rangeMap);
+//		System.out.println("maxMap : " + maxMap);
+//		System.out.println("rangeMap : " + rangeMap);
 		System.out.println("loadGenTree Finish!!\n\n");
 
 	}
 
 	private ArrayList<Integer> fitNode;
 
-	public kAnonymity(String Taxonomy, String header, String dataFilePath) {
+	public kAnonymity2(String Taxonomy, String header, String dataFilePath) {
 		StringTokenizer headerToken = new StringTokenizer(header, "|");
 
 		while (headerToken.hasMoreElements()) {
@@ -90,7 +102,7 @@ public class kAnonymity {
 		this.genTreeFileName = Taxonomy;
 		this.inputFile_T1 = dataFilePath;
 
-		System.out.println(this.inputFile_T1);
+//		System.out.println(this.inputFile_T1);
 	}
 
 	public void loadData(String inputFileName, ArrayList<ArrayList> curTupleList) {
@@ -100,17 +112,41 @@ public class kAnonymity {
 			InputStreamReader reader = new InputStreamReader(stream);
 			BufferedReader buffer = new BufferedReader(reader);
 
+			// pass header
+			String[] temp = buffer.readLine().split(",");
+
+			ArrayList<Integer> headerInt = new ArrayList<Integer>();
+
+//			System.out.println("projectionList : " + projectionList);
+
+			for (int i = 0; i < this.projectionList.size(); i++) {
+				for (int j = 0; i < temp.length; j++) {
+//					System.out.println(i + ",  " + j);
+					if (this.projectionList.get(i).equals(temp[j])) {
+						headerInt.add(j);
+						break;
+					}
+				}
+			}
+
+//			System.out.println("headerInt : " + headerInt);
+
 			int curCount = 0;
 			while (true) {
-				String label = buffer.readLine();
+				String[] label = buffer.readLine().split(",");
 				if (label == null)
 					break;
 
 				ArrayList curTuple = new ArrayList();
-				StringTokenizer st = new StringTokenizer(label, "|");
 
-				for (int i = 0; i < this.projectionList.size(); ++i)
-					curTuple.add(new Integer(st.nextToken()));
+				for (int i = 0; i < headerInt.size(); i++) {
+					curTuple.add(new Integer(label[headerInt.get(i)]));
+				}
+
+				// System.out.println("curTuple : " + curTuple);
+
+				// for (int i = 0; i < this.projectionList.size(); ++i)
+				// curTuple.add(new Integer(st.nextToken()));
 				curTupleList.add(curTuple);
 
 			}
@@ -123,9 +159,9 @@ public class kAnonymity {
 	public void performGeneralization(ArrayList<Integer> curNode, ArrayList<ArrayList> curTupleList,
 			ArrayList<String> transfromed_curTupleList) {
 
-		System.out.println("curTupleList : " + curTupleList);
+//		System.out.println("curTupleList : " + curTupleList);
 		int attrNumber = this.projectionList.size();
-		System.out.println("projectionList : " + projectionList);
+//		System.out.println("projectionList : " + projectionList);
 		HashMap<String, ArrayList<String>> anonymizedResult = new HashMap<String, ArrayList<String>>();
 
 		for (int i = 0; i < curTupleList.size(); ++i) {
@@ -159,7 +195,11 @@ public class kAnonymity {
 					tranformedStr = tranformedStr + "|" + curAttrValue;
 				}
 			}
-
+			if (!equivalentClass.containsKey(tranformedStr)) {
+				equivalentClass.put(tranformedStr, 1);
+			} else {
+				equivalentClass.put(tranformedStr, equivalentClass.get(tranformedStr) + 1);
+			}
 			transfromed_curTupleList.add(tranformedStr);
 
 		}
@@ -176,17 +216,21 @@ public class kAnonymity {
 			middleGL.add(middleLevel);
 		}
 
-		System.out.println("middleGL : " + middleGL);
+//		System.out.println("middleGL : " + middleGL);
 		performGeneralization(middleGL, this.tupleList_T1, this.transfromed_tupleList_T1);
 
+	}
+
+	public HashMap<String, Integer> equivalent(){
+		return equivalentClass;
 	}
 
 	public String run() {
 		loadGenTree();
 		loadData(this.inputFile_T1, this.tupleList_T1);
 		performAnonymity();
-		System.out.println(transfromed_tupleList_T1);
-		return KValue + "\n";
+		System.out.println(equivalentClass);
+		return transfromed_tupleList_T1.toString() + "\n";
 	}
 
 	// main part

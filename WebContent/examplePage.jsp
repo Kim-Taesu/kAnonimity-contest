@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
-<%@ page import="anonymity.kAnonymity"%>
+<%@ page import="anonymity.*"%>
 <%@ page import="java.util.HashMap"%>
 
 
@@ -44,21 +44,17 @@
 
 		String originalData = request.getParameter("originalData");
 
-		System.out.println("tax : " + taxonomy + "\nhead : " + header + "\noriData : " + originalData);
-
 		long start = System.currentTimeMillis();
 
 		//kAnonymity(String Taxonomy, String header, int Kvalue, String dataFilePath)
-		kAnonymity mykAnonymity = new kAnonymity(taxonomy, header, originalData);
+		kAnonymity2 mykAnonymity = new kAnonymity2(taxonomy, header, originalData);
 		String result = mykAnonymity.run();
-		HashMap<String, Integer> equivalent = new HashMap<String, Integer>() ;
-		
-		//HashMap<String, Integer> equivalent = mykAnonymity.equivalent();
-		System.out.println("result : " + result);
-		System.out.println("***** Done ***** ");
-		long end = System.currentTimeMillis();
+		result.replaceAll(", ", "\n");
+		System.out.println("!!!" + result);
+		//HashMap<String, Integer> equivalent = new HashMap<String, Integer>();
 
-		System.out.println("runtime : " + (end - start) / 1000.0);
+		HashMap<String, Integer> equivalent = mykAnonymity.equivalent();
+		long end = System.currentTimeMillis();
 	%>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
@@ -101,22 +97,24 @@
 		<div class="my-auto">
 			<h2 class="mb-5">Example</h2>
 			<p>
-				Result from example data.<br>Then choose your K value.
+				Time to Anonymize Sample data <br>
+				<%=(end - start) / 1000.0 + " sec"%>
 			</p>
 		</div>
 
 
 		<div class="row">
+
 			<div class="col-xs-12 col-md-6">
 				<h4 class="mb-5">Sampling Data</h4>
 				<div class="row-xs-12 row-md-6">
-					<textarea id="inputbox" cols="70" rows="10"><%=result%></textarea>
+					<textarea id="inputbox" cols="70" rows="9"><%=result%></textarea>
 					<br> <br>
 				</div>
 
 				<h4 class="mb-5">Sample Data's Equivalent Class</h4>
 				<div class="row-xs-6 row-md-6">
-					<textarea id="inputbox" cols="70" rows="10"><%=equivalent%></textarea>
+					<textarea id="inputbox" cols="70" rows="9"><%=equivalent%></textarea>
 				</div>
 
 
@@ -127,18 +125,26 @@
 
 				<div class="row-xs-12 row-md-6"></div>
 				<h4 class="mb-5">What is the Equivalent Class??</h4>
-				<textarea id="inputbox" cols="80" rows="10">
+				<textarea id="inputbox" cols="80" rows="9">
 Congruence is an example of an equivalence relation. The leftmost two triangles are congruent, while the third and fourth triangles are not congruent to any other triangle shown here. Thus, the first two triangles are in the same equivalence class, while the third and fourth triangles are each in their own equivalence class.
 In mathematics, when the elements of some set S have a notion of equivalence (formalized as an equivalence relation) defined on them, then one may naturally split the set S into equivalence classes. These equivalence classes are constructed so that elements a and b belong to the same equivalence class if and only if a and b are equivalent.
 
 Formally, given a set S and an equivalence relation ~ on S, the equivalence class of an element a in S is the set</textarea>
 
 				<div class="row-xs-6 row-md-6">
-				 <br>
-					<h4 class="mb-5">Enter the value of k. (Equivalent Class's num)</h4>
-					<label for="name">k Value :</label> <input type="text" id="kValue" />
-					<button type="submit" class="btn btn-primary pull-right"
-						onclick="getK()">Next</button>
+
+					<form method="post" action="reviewPage.jsp">
+						<br>
+						<h4 class="mb-5">Enter the value of k. (Equivalent Class's
+							num)</h4>
+						<input type="hidden" value="<%=taxonomy%>" name="taxonomy" />
+						<input type="hidden" value="<%=originalData%>" name="originalData" />
+						<label for="kValue">k Value :</label> 
+						<input type="text" name="kValue"/>
+						<button type="submit" class="btn btn-primary pull-right"
+							onclick="getK()">Next</button>
+					</form>
+
 				</div>
 
 
