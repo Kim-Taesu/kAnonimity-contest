@@ -7,8 +7,8 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.nio.*"%>
 <%@ page import="java.nio.file.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
+<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -33,21 +33,59 @@
 
 <!-- Custom styles for this template -->
 <link href="css/resume.min.css" rel="stylesheet">
+
 </head>
 
 <body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Data Privacy Project</span>
+        <span class="d-none d-lg-block">
+          <!-- <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="img/profile.jpg" alt=""> -->
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="main.jsp">Start</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link js-scroll-trigger" href="dataInputPage.jsp">Data Input</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="quasiIdentifierPage.jsp">Quasi-Identifier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="taxonomyTreePage.jsp">Taxonomy tree</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="examplePage.jsp">Example</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="reviewPage.jsp">Review</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Download</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 	<%
+		String fileName1 = request.getParameter("fileName1");
 		// request.getRealPath("상대경로") 를 통해 파일을 저장할 절대 경로를 구해온다.
 		// 운영체제 및 프로젝트가 위치할 환경에 따라 경로가 다르기 때문에 아래처럼 구해오는게 좋음
 		String uploadPath = request.getRealPath("/uploadFile");
-		out.println("서버 내 저장 위치 : " + uploadPath + "<br/>");
-
+		//out.println("서버 내 저장 위치 : " + uploadPath + "<br/>");
+		
 		int maxSize = 1024 * 1024 * 10; // 한번에 올릴 수 있는 파일 용량 : 10M로 제한
 
 		String name = "";
 		String subject = "";
 
-		String fileName1 = ""; // 중복처리된 이름
+		//String fileName1 = ""; // 중복처리된 이름
 		String originalName1 = ""; // 중복 처리전 실제 원본 이름
 		long fileSize = 0; // 파일 사이즈
 		String fileType = ""; // 파일 타입
@@ -109,22 +147,34 @@
 		originalData += fileName1;
 		System.out.println("originalData = " + originalData);
 	%><br>
+	
+	<hr class="m-0">
+	
+	<section class="resume-section p-3 p-lg-5 d-flex flex-column"
+		id="Review">
+		<div class="my-auto">
+			<h1 class="mb-3">Data Analyze success!</h1>
+
+			<div class="my-auto">
+				<form action="quasiIdentifierPage.jsp" method="post" name="fileCheckFormName">
+					<input type="hidden" value="<%=fileName1%>" name="fileName1" /> 
+					<input type="hidden" value="<%=originalName1%>" name="originalName1" /> 
+					<input type="hidden" value="<%=header%>" name="header" /> 
+					<input type="hidden" value="<%=originalData%>" name="originalData" />
+					<button type="submit" class="btn btn-primary">Next</button>
+				</form>
+			</div>
+			
+		</div>
+
+
+	</section>
+	
 </body>
 <!-- 
     해당 페이지는 사용자에게 보여줄 필요가 없고 해당 정보를 전달만 해주면 되기 때문에 hidden으로 했다.
  -->
-<form action="fileCheck.jsp" method="post" name="fileCheckFormName">
 
-	<input type="hidden" value="<%=fileName1%>" name="fileName1" /> <input
-		type="hidden" value="<%=originalName1%>" name="originalName1" /> <input
-		type="hidden" value="<%=header%>" name="header" /> <input
-		type="hidden" value="<%=originalData%>" name="originalData" />
-</form>
-
-<form action="taxonomyTreePage.jsp" method="post"
-	name="taxonomyTreePage">
-	<input type="hidden" value="<%=originalData%>" name="originalData" />
-</form>
 
 
 <!-- 
@@ -132,7 +182,4 @@
     javascript를 이용해서 onclick시 폼태그를 잡아와 submit()을 호출해 폼태그를 전송
  -->
 
-<a href="#" class="btn btn-primary pull-right"
-	onclick="javascript:document.fileCheckFormName.submit()">업로드 파일
-	확인하기 :<%=fileName1%></a>
 

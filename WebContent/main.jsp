@@ -48,7 +48,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link js-scroll-trigger" href="main.jsp">Start</a>
           </li>
           <li class="nav-item">
@@ -73,10 +73,10 @@
       </div>
     </nav>
 
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 ">
 
-      <section class="resume-section p-3 p-lg-5 d-flex d-column" id="Start">
-        <div class="my-auto">
+      <section class="resume-section p-3 p-lg-5 d-flex d-column" >
+        <div class="my-auto" id="Start">
           <h1 class="mb-0"><br><br>Data Privacy
             <span class="text-primary">Project</span>
           </h1>
@@ -86,28 +86,26 @@
 			  if(userID == null){
 					
 		  %>
-	          <p class="lead mb-5">Please sign in or up to start this project.</p>
+	          <h3 class="mb-0">Please sign in or up to start this project.</h3>
 			  <form>
-			  		<button type="button" class="btn btn-primary" onclick="location.href='login.jsp'">Sign in</button>
-			  		<button type="button" class="btn btn-primary" onclick="location.href='join.jsp'">Sign up</button>
+			  		<button type="button" class="btn btn-primary pull-right" onclick="location.href='login.jsp'">Sign in</button>
+			  		<button type="button" class="btn btn-danger" onclick="location.href='join.jsp'">Sign up</button>
 			  </form>  
 		  <%
 			  }else{
 		  %>
-				<p class="lead mb-5">Start this project!</p>
+				<h3 class="mb-0">Start this project!</h3>
 				<form>
 					<button type="button" class="btn btn-primary pull-right" onclick="location.href='dataInputPage.jsp'">Start</button>
-					<button type="button"  class="btn btn-danger" onclick="location.href='logoutAction.jsp'">Sign out</button>
+					<button type="button" class="btn btn-danger" onclick="location.href='logoutAction.jsp'">Sign out</button>
 				</form>
 		  <%
 			  }
 		  %>
 			</div>
       </section>
-
-		
-		
-    </div>
+	</div>
+	
     <script type="text/javascript" src="/js/jquery.form.js"></script>
     
     <script type="text/javascript">
@@ -130,17 +128,7 @@
 	
 		document.getElementById('files').addEventListener('change',
 				handleFileSelect, false);
-		function getK() {
-			var k = prompt("What's your k-value?", "K");
-			location.href = '#Review';
-		}
-		function submit() {
-			alert('Please wait for anonymizing Data...');
-			location.href = '#Download';
-		}
-		function download() {
-			location.href = "http://www.test.com/test.zip";
-		}
+		
 	</script>
     
 					

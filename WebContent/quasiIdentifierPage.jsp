@@ -54,18 +54,19 @@
 			userID = (String) session.getAttribute("userID");
 		}
 		
-		String originalData = request.getParameter("originalData");
 	%>
 	
 	<script type="text/javascript">
 	
-	function add_item(){
+	window.onload = function add_item(){
         // pre_set 에 있는 내용을 읽어와서 처리..
         
         
         <%
 	        request.setCharacterEncoding("UTF-8");
 		
+        	String originalData = request.getParameter("originalData");
+        	String fileName1 = request.getParameter("fileName1");
 			String header = request.getParameter("header");
 			System.out.println(header);
 			StringTokenizer st = new StringTokenizer(header, ",");
@@ -87,8 +88,7 @@
         var str = "<%=sb.toString()%>";
         var strArr = str.split(",");
         
-        alert(strArr);
-        alert(strArr.length);
+       
         
         
         for(var i=0; i<strArr.length; i++){
@@ -102,7 +102,7 @@
             
             document.getElementById('cb').setAttribute("value", strArr[i]);
             document.getElementById('cb').setAttribute("name", "checked");
-            document.getElementById('ta').setAttribute("placeholder", strArr[i]);
+            document.getElementById('label').innerHTML = strArr[i];
             
             div.innerHTML = document.getElementById('dest').innerHTML;
         }
@@ -129,7 +129,7 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="dataInputPage.jsp">Data Input</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link js-scroll-trigger" href="quasiIdentifierPage.jsp">Quasi-Identifier</a>
           </li>
           <li class="nav-item">
@@ -149,37 +149,81 @@
     </nav>
     
        <hr class="m-0">
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="SelectQI">
+        <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="SelectQI">
+        
+        	<div class="my-auto">
+        		
+        		<h1 class="mb-3">Select Quasi-Identifier</h1>
+        		
+        		<div class="container">
+        		
+        			<div class="resume-item d-flex flex-column flex-md-row mb-5" style="width: 100%; height:50%">
+						<div class="resume-content my-auto">
+							<h2>What is quasi-identifier?</h2>
+							<iframe src="http://www.ehealthinformation.ca/faq/quasi-identifier/" width=1000 height=500></iframe>
+						</div>
+        			</div>
+        			        		
+        			<div class="resume-item d-flex flex-column flex-md-row mb-5" style="width: 100%; height:50%">
+        				<div class="resume-content" style="width:1000px; height:200px">
+        					<h2 class="mb-2">Attribute Header</h2>
+        					<div class="subheading mb-1">
+	          					Select your header as a quasi-identifier
+	          				</div>
+							<div class="container" id="dest" style="display: none;">
+									<p style="float:left; margin:10px;">
+										<input type="checkbox" name="" value="" id="cb"><label id="label" style="padding:5px; vertical-align:middle;"> </label>
+									</p>
+							</div>		
+							<form method="post" action="taxonomyTreePage.jsp" style="vertical-align:middle;">
+								<div id="field">
+								<!-- 동적 생성 위치 -->
+								</div>
+								<button type="submit" class="btn btn-primary pull-right">Next</button>
+								<input type="hidden" value="<%=originalData %>" name="originalData" />
+								<input type="hidden" value="<%=fileName1 %>" name="fileName1"/>
+							</form>
+							
+        				</div>
+						
+					</div>
+        		
+        		</div>
+        		
+        	</div>
+        	
+        </section>
+        
+      <!-- <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="SelectQI">
         <div class="my-auto">
-          <br><br><br><br><br><br><br><br><h2 class="mb-5">Select Quasi-Identifier</h2>
+          <h1 class="mb-3">Select Quasi-Identifier</h1>
 
-          <div class="resume-item d-flex flex-column flex-md-row mb-5">
-            <div class="resume-content mr-auto">
-              
-              <a href="http://www.ehealthinformation.ca/faq/quasi-identifier/">What is quasi-identifier?</a><br><br>
-              
-              <!-- <button class="btn btn-primary pull-right" onclick="header();">Get Your Header!</button> -->
-              
-              <h3 class="mb-0">Attribute Header</h3>
-              <input type = "button" value="추가" onclick="add_item()"><br>
-              
-              <div id="dest" style="display:none">
-              		
-              		<input type="checkbox" name="" value="" id="cb">
-              		<textarea placeholder="" id="ta"></textarea>
-              		
-	          </div>
-	          
-	          <form method="post" action="taxonomyTreePage.jsp" id="field">
-	          		<button type="submit" class="btn btn-primary pull-right">Submit</button>
-					<input type="hidden" value="<%=originalData %>" name="originalData"/>	
-	          </form>	
-	          
-	          </div>
-          </div>
+          <div class="resume-item d-flex flex-column flex-md-row mb-2">
+
+				<div class="resume-content mr-auto">
+
+					<a href="http://www.ehealthinformation.ca/faq/quasi-identifier/"><font size="30px">What is quasi-identifier?</font></a><br>
+					<br> 
+
+					<h2 class="mb-2">Attribute Header</h2>
+					
+					<div id="dest" style="display: none">
+
+						<input type="checkbox" name="" value="" id="cb">
+						<textarea placeholder="" id="ta"></textarea>
+
+					</div>
+
+					<form method="post" action="taxonomyTreePage.jsp" id="field">
+						<button type="submit" class="btn btn-primary pull-right">Submit</button>
+						<input type="hidden" value="<%=originalData %>" name="originalData" />
+						<input type="hidden" value="<%=fileName1 %>" name="fileName1"/>
+					</form>
+
+				</div>
+			</div>
         </div>
-      </section>
+      </section> -->
 	<script type="text/javascript" src="/js/jquery.form.js"></script>
 	
 	

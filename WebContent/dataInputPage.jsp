@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +51,7 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="main.jsp">Start</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link js-scroll-trigger" href="dataInputPage.jsp">Data Input</a>
           </li>
           <li class="nav-item">
@@ -74,27 +76,62 @@
     <hr class="m-0">
 
     <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Input">
-	      <div class="container">
-	      		<h2>Select your data (*.csv)</h2>	      	
-		      	
-		      	<form method="POST" action="fileUpload.jsp" enctype="multipart/form-data">
-					<!-- COMPONENT START -->
-					<div class="form-group">
-						<div class="input-group input-file" name="Ficher1">
-					   		<input type="file" class="form-control" name="fileName1"/>			
-					        <span class="input-group-btn"></span>
-						</div>
-				   	</div>
-					<!-- COMPONENT END -->
-					<div class="form-group">
-						<button type="submit" class="btn btn-primary pull-right">Submit</button>
-						<button type="reset" class="btn btn-danger">Reset</button>
+	      <div class="my-auto">
+	      		
+	      		<h1>data input</h1>
+	      		
+	      		<div class="container">
+	      		
+	      			<div class="container" style="float: left; width: 100%">
+	      				<h2 class="mb-1">Data Example</h2>
+	      				<div class="subheading mb-1">
+          					EX) C:\Users\Name\Descktop\data.csv
+          				</div>
+						<textarea class="form-control col-sm-15" rows="15"
+						placeholder='id,height,weight,email,gender,ip_address
+1,9,24,ithirsk0@ucla.edu,1,124.252.31.194
+2,200,20,rnoakes1@dmoz.org,2,135.77.181.18
+3,99,14,vyashunin2@behance.net,2,99.188.41.99
+4,71,65,lcapin3@sun.com,1,38.198.146.8
+5,79,36,rjouhning4@constantcontact.com,1,108.190.206.101
+6,26,6,mhinsche5@google.co.uk,2,80.0.141.220
+7,80,100,glaurenty6@people.com.cn,2,16.119.112.229
+8,44,54,gspeaks7@ustream.tv,2,142.4.106.17
+9,64,1,nbuckthorp8@goo.ne.jp,2,208.230.198.202
+10,28,97,rfortescue9@tripod.com,2,191.30.80.68
+11,110,11,sboorda@amazon.co.uk,1,246.18.120.99
+12,54,58,cbarhemsb@wiley.com,1,92.187.181.124
+13,25,35,qhuberyc@thetimes.co.uk,2,147.3.232.89
+14,52,64,csilled@nydailynews.com,2,93.42.81.227
+15,90,59,bedwardsone@tiny.cc,2,97.31.141.77
+'></textarea><br>
+	      			</div>
+					
+					
+					<div class="container" style="float: left; width:100%">
+						<h2 class="mb-1">Select your data (*.csv)</h2>
+						<form method="POST" action="fileUpload.jsp" enctype="multipart/form-data">
+							<!-- COMPONENT START -->
+							<!-- <div class="form-group">
+								<div class="input-group input-file" name="Ficher1">
+							   		<input type="file" class="form-control" name="fileName1"/>			
+							        <span class="input-group-btn"></span>
+								</div>
+						   	</div> -->
+							<div class="form-group">
+								<input type="file" class="form-control" id="customFile" name="fileName1"> 
+								<label class="custom-file-label"
+									for="customFile">Choose file</label>
+							</div>
+							<!-- COMPONENT END -->
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary pull-right">Next</button>
+								<button type="reset" class="btn btn-danger">Reset</button>
+							</div>
+						</form>
 					</div>
-				</form>
-
-				<h2>Data Example</h2>
-				<textarea class="form-control col-sm-7" rows="2" placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
-				<img src="/WebContent/img/img01.PNG" class="img-responsive" style="margin:0 auto; object-fit:container">
+										
+				</div>
 	      </div>
       </section>
 

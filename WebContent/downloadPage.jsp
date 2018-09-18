@@ -32,6 +32,19 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
+		
+		//String path = request.getParameter("downloadPath");
+		
+		/*Process process = null;
+		try {
+			String command = "hadoop fs -get " + path + " /home/hp/eclipse-web/SWDevelopment/spark_output/";
+			process = Runtime.getRuntime().exec(command);
+		} catch (Exception e) {
+			out.println("Error : " + e);
+		}*/
+		
+		
+		String server_path = "/home/hp/eclipse-web/SWDevelopment/spark_output/";
 	%>
 	
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
@@ -64,7 +77,7 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="reviewPage.jsp">Review</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Download</a>
           </li>
         </ul>
@@ -76,15 +89,18 @@
 
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Download">
         <div class="my-auto">
-         	 <h2 class="mb-5">Download</h2>       	 
-       	 </div>
+         	 <h1 class="mb-5">Download</h1>
+			 <div class="container">
+				<h2>Result File</h2>
+				<textarea class="form-control col-sm-7" rows="2"
+					placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
+				<br>
+				<button type="submit" class="btn btn-primary pull-right">Download</button>
+			</div>
+
+		</div>
       		
-		<div class="container">
-	       		<h2>Result File</h2>
-	       		<textarea class="form-control col-sm-7" rows="2" placeholder='C:\Users\Name\Descktop\File\data.csv'></textarea>
-	       		<p><br></p>
-	       		<button type="submit" class="btn btn-primary pull-right" onclick="download()">Download</button>
-	     </div>
+		
       </section>	
 </body>
 </html>
