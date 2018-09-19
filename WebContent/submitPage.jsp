@@ -117,6 +117,18 @@
 						e.printStackTrace();
 					}
 
+					Process process2 = null;
+					try {
+						String command = "hadoop fs -put " + filePath + " /lg_project/data/";
+						System.out.println("command : " + command);
+						process2 = Runtime.getRuntime().exec(command);
+						process2.waitFor();
+						process2.destroy();
+						out.println("load file to HDFS!<br>");
+					} catch (Exception e) {
+						out.println("Error : " + e);
+					}
+
 					Process process = null;
 					try {
 						long start = System.currentTimeMillis();
