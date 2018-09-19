@@ -66,21 +66,23 @@
 		</div>
 	</nav>
 
+	<script>
+		alert("successs!!");
+	</script>
+
+
 	<hr class="m-0">
 
 	<section class="resume-section p-3 p-lg-5 d-flex flex-column"
 		id="Review">
 		<div class="my-auto">
-			<h1 class="mb-5">Submit</h1>
+			<h1 class="mb-5">Download</h1>
 		</div>
 
 		<div class="row">
 
 			<div class="col-xs-12 col-md-6">
 				<h2>Load data to HDFS</h2>
-				<script>
-					alert("Anonymizing...");
-				</script>
 
 				<%
 					String userID = null;
@@ -92,21 +94,19 @@
 					String taxonomy = request.getParameter("taxonomy");
 					String filePath = request.getParameter("originalData");
 					String output = request.getParameter("filename");
-
+					String downloadPath = "/lg_project/output/" + output;
 					String fileName = "/home/hp/eclipse-web/SWDevelopment/taxonomy/gtree.txt";
 
+					System.out.println("downloadPath : " + downloadPath);
+
+					//make gTree.txt
 					try {
-						// 파일 객체 생성
 						File file = new File(fileName);
 
 						if (file.exists()) {
 							if (file.delete()) {
 								System.out.println("파일삭제 성공");
-							} else {
-								System.out.println("파일삭제 실패");
 							}
-						} else {
-							System.out.println("파일이 존재하지 않습니다.");
 						}
 						FileWriter fw = new FileWriter(file, true);
 						fw.write(taxonomy);
@@ -117,34 +117,28 @@
 						e.printStackTrace();
 					}
 
-					String[] originalData_Temp = filePath.split("/");
-					String originalData = originalData_Temp[originalData_Temp.length - 1];
-
 					Process process = null;
 					try {
 						long start = System.currentTimeMillis();
 						String command = "time spark-submit --class com.kAnonymity_maven.kAnonymity_project --master yarn --deploy-mode cluster --driver-memory 10g --executor-memory 10g --executor-cores 4 "
-								+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar " + kValue + "  /lg_project/data/"
-								+ originalData + " " + header + " " + fileName + " " + output + " 10";
+								+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar " + kValue + "  /lg_project/data/" + output
+								+ " " + header + " " + fileName + " " + output + " 10";
 						process = Runtime.getRuntime().exec(command);
-
 						process.waitFor();
 						process.destroy();
+
 						long end = System.currentTimeMillis();
 
 						double running_time = (end - start) / 1000.0;
-
 						out.println("running time : " + running_time);
-						out.println(" ");
-						out.println("Your Anonymized Data Sample..!");
+						out.println("<br>");
+						out.println("Your Anonymized Data Sample..!<br>");
 					} catch (Exception e) {
 						out.println("Error : " + e);
 					}
 
 					int lineCount = 0;
 					String line = "";
-					
-					String downloadPath = "/lg_project/output/" + output;
 
 					Process ps = null;
 					try {
@@ -154,12 +148,13 @@
 								new InputStreamReader(new SequenceInputStream(ps.getInputStream(), ps.getErrorStream())));
 						while ((line = br.readLine()) != null) {
 							lineCount++;
-							if (lineCount > 100)
+							if (lineCount > 20)
 								break;
 				%>
 				<%=line%><br>
 				<%
-					}
+					ps.destroy();
+						}
 						br.close();
 					} catch (IOException ie) {
 						ie.printStackTrace();
@@ -178,9 +173,13 @@
 					name="taxonomy"><%=taxonomy%></textarea>
 				<br>
 
-				<form>
-					<button type="submit" class="btn btn-primary pull-right"
-						onclick="location.href='downloadPage.jsp'">Next</button>
+
+				<form method="post" action="downloadPage.jsp">
+					<button type="submit" class="btn btn-primary pull-right">Download
+						File</button>
+					<input type="hidden" value="<%=downloadPath%>" name="downloadPath" />
+					<input type="hidden" value="<%=output%>" name="output" />
+
 				</form>
 			</div>
 

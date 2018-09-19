@@ -42,7 +42,7 @@
 		String originalData = originalData_Temp[originalData_Temp.length - 1];
 		String kValue = request.getParameter("kValue");
 
-		String header = request.getParameter("header");
+		String header = request.getParameter("selectHeader");
 		
 		Process process = null;
 		BufferedReader in = null;

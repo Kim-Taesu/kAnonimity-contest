@@ -74,7 +74,7 @@
       </div>
     </nav>
 	<%
-		String fileName1 = request.getParameter("fileName1");
+		String inputData = request.getParameter("inputData");
 		// request.getRealPath("상대경로") 를 통해 파일을 저장할 절대 경로를 구해온다.
 		// 운영체제 및 프로젝트가 위치할 환경에 따라 경로가 다르기 때문에 아래처럼 구해오는게 좋음
 		String uploadPath = request.getRealPath("/uploadFile");
@@ -113,7 +113,7 @@
 				originalName1 = multi.getOriginalFileName(file1);
 				// 파일명이 중복될 경우 중복 정책에 의해 뒤에 1,2,3 처럼 붙어 unique하게 파일명을 생성하는데
 				// 이때 생성된 이름을 filesystemName이라 하여 그 이름 정보를 가져온다.(중복에 대한 처리)
-				fileName1 = multi.getFilesystemName(file1);
+				inputData = multi.getFilesystemName(file1);
 				// 파일 타입 정보를 가져옴
 				fileType = multi.getContentType(file1);
 				// input file name에 해당하는 실재 파일을 가져옴
@@ -124,7 +124,7 @@
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<String> lines = Files.readAllLines(Paths.get(uploadPath.concat("/").concat(fileName1)));
+		List<String> lines = Files.readAllLines(Paths.get(uploadPath.concat("/").concat(inputData)));
 
 		//파일 읽기
 		try {
@@ -144,7 +144,7 @@
 		}
 		String originalData = uploadPath;
 		originalData += "/";
-		originalData += fileName1;
+		originalData += inputData;
 		System.out.println("originalData = " + originalData);
 	%><br>
 	
@@ -157,7 +157,7 @@
 
 			<div class="my-auto">
 				<form action="quasiIdentifierPage.jsp" method="post" name="fileCheckFormName">
-					<input type="hidden" value="<%=fileName1%>" name="fileName1" /> 
+					<input type="hidden" value="<%=inputData%>" name="inputData" /> 
 					<input type="hidden" value="<%=originalName1%>" name="originalName1" /> 
 					<input type="hidden" value="<%=header%>" name="header" /> 
 					<input type="hidden" value="<%=originalData%>" name="originalData" />

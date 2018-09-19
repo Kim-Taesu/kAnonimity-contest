@@ -119,7 +119,7 @@
 								</div>
 						   	</div> -->
 							<div class="form-group">
-								<input type="file" class="form-control" id="customFile" name="fileName1"> 
+								<input type="file" class="form-control" id="customFile" name="inputData"> 
 								<label class="custom-file-label"
 									for="customFile">Choose file</label>
 							</div>

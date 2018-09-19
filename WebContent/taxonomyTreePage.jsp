@@ -34,15 +34,15 @@
 		}
 		
 		String[] arr = request.getParameterValues("checked");
-		String res = "";
+		String selectHeader = "";
 		for(int i=0; i<arr.length; i++){
-			res += arr[i];
+			selectHeader += arr[i];
 			if(i < arr.length-1){
-				res += "|";	
+				selectHeader += "|";	
 			}
 		}
 		String originalData = request.getParameter("originalData");
-		String fileName1 = request.getParameter("fileName1");
+		String inputData = request.getParameter("inputData");
 	%>
 	
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
@@ -106,9 +106,9 @@ gender|1|0_2
 					<form method="post" action="examplePage.jsp">
 						<h2>Taxonomy Tree</h2>
 						<textarea class="form-control col-sm-8" cols="100" rows="15" name="taxonomy"></textarea>
-						<input type="hidden" value="<%=res%>" name="res" />
+						<input type="hidden" value="<%=selectHeader%>" name="selectHeader" />
 						<input type="hidden" value="<%=originalData%>" name="originalData" />
-						<input type="hidden" value="<%=fileName1%>" name="fileName1" />		
+						<input type="hidden" value="<%=inputData%>" name="inputData" />		
 						<br>
 						<input type="submit" class="btn btn-primary" value="Sampling Start!" />
 					</form>

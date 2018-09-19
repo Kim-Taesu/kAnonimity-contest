@@ -37,18 +37,7 @@
 		// post방식에 대한 한글 인코딩 방식 지정 get방식은 서버의 server.xml에서 Connector태그에 URIEncoding="UTF-8" 추가
 		request.setCharacterEncoding("UTF-8");
 
-		//String header = request.getParameter("header");
-		//StringTokenizer st = new StringTokenizer(header, ",");
-		//int cnt = st.countTokens();
-		//String[] hArr = new String[cnt];
-		//int i = 0; 
-		//while(st.hasMoreElements()){
-		//	hArr[i++] = st.nextToken();
-		//}
-		
-		//for(i=0; i<hArr.length; i++){
-		//	System.out.print(hArr[i]);
-		//}
+	
 		String userID = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
@@ -66,7 +55,7 @@
 	        request.setCharacterEncoding("UTF-8");
 		
         	String originalData = request.getParameter("originalData");
-        	String fileName1 = request.getParameter("fileName1");
+        	String inputData = request.getParameter("inputData");
 			String header = request.getParameter("header");
 			System.out.println(header);
 			StringTokenizer st = new StringTokenizer(header, ",");
@@ -181,7 +170,7 @@
 								</div>
 								<button type="submit" class="btn btn-primary pull-right">Next</button>
 								<input type="hidden" value="<%=originalData %>" name="originalData" />
-								<input type="hidden" value="<%=fileName1 %>" name="fileName1"/>
+								<input type="hidden" value="<%=inputData %>" name="inputData"/>
 							</form>
 							
         				</div>
@@ -193,37 +182,6 @@
         	</div>
         	
         </section>
-        
-      <!-- <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="SelectQI">
-        <div class="my-auto">
-          <h1 class="mb-3">Select Quasi-Identifier</h1>
-
-          <div class="resume-item d-flex flex-column flex-md-row mb-2">
-
-				<div class="resume-content mr-auto">
-
-					<a href="http://www.ehealthinformation.ca/faq/quasi-identifier/"><font size="30px">What is quasi-identifier?</font></a><br>
-					<br> 
-
-					<h2 class="mb-2">Attribute Header</h2>
-					
-					<div id="dest" style="display: none">
-
-						<input type="checkbox" name="" value="" id="cb">
-						<textarea placeholder="" id="ta"></textarea>
-
-					</div>
-
-					<form method="post" action="taxonomyTreePage.jsp" id="field">
-						<button type="submit" class="btn btn-primary pull-right">Submit</button>
-						<input type="hidden" value="<%=originalData %>" name="originalData" />
-						<input type="hidden" value="<%=fileName1 %>" name="fileName1"/>
-					</form>
-
-				</div>
-			</div>
-        </div>
-      </section> -->
 	<script type="text/javascript" src="/js/jquery.form.js"></script>
 	
 	
