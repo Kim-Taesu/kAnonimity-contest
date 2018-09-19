@@ -124,7 +124,6 @@
 						process2 = Runtime.getRuntime().exec(command);
 						process2.waitFor();
 						process2.destroy();
-						out.println("load file to HDFS!<br>");
 					} catch (Exception e) {
 						out.println("Error : " + e);
 					}
@@ -143,8 +142,8 @@
 
 						double running_time = (end - start) / 1000.0;
 						out.println("running time : " + running_time);
-						out.println("<br>");
-						out.println("Your Anonymized Data Sample..!<br>");
+						out.println("<br><br>");
+						out.println("<Strong>Your Anonymized Data Sample..!</Strong><br>");
 					} catch (Exception e) {
 						out.println("Error : " + e);
 					}
@@ -163,7 +162,7 @@
 							if (lineCount > 20)
 								break;
 				%>
-				<%=line%><br>
+				<i><%=line%></i><br>
 				<%
 					ps.destroy();
 						}
@@ -181,7 +180,7 @@
 
 				<h2>Taxonomy Tree</h2>
 
-				<textarea class="form-control col-sm-6" cols="70" rows="20"
+				<textarea class="form-control col-sm-6" cols="100" rows="20"
 					name="taxonomy"><%=taxonomy%></textarea>
 				<br>
 

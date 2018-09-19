@@ -107,6 +107,7 @@ public class kAnonymity2 {
 
 	public void loadData(String inputFileName, ArrayList<ArrayList> curTupleList) {
 		System.out.println("loadData Start!!");
+		int line_count =0;
 		try {
 			FileInputStream stream = new FileInputStream(inputFileName);
 			InputStreamReader reader = new InputStreamReader(stream);
@@ -134,6 +135,8 @@ public class kAnonymity2 {
 			int curCount = 0;
 			while (true) {
 				String[] label = buffer.readLine().split(",");
+				line_count++;
+				if(line_count>1000) break;
 				if (label == null)
 					break;
 
