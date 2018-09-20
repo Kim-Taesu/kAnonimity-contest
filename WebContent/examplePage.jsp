@@ -37,20 +37,17 @@
 			userID = (String) session.getAttribute("userID");
 		}
 
+		System.out.println("!!!Example Page!!!");
+
 		String taxonomy = request.getParameter("taxonomy");
-
 		String selectHeader = request.getParameter("selectHeader");
-
-		String originalData = request.getParameter("originalData");
-
-		String inputData = request.getParameter("inputData");
-
-		System.out.println("tax : " + taxonomy + "\nhead : " + selectHeader + "\noriData : " + originalData);
+		String inputDataRealPath = request.getParameter("inputDataRealPath");
+		String inputDataName = request.getParameter("inputDataName");
 
 		long start = System.currentTimeMillis();
 
 		//kAnonymity(String Taxonomy, String header, int Kvalue, String dataFilePath)
-		kAnonymity2 mykAnonymity = new kAnonymity2(taxonomy, selectHeader, originalData);
+		kAnonymity2 mykAnonymity = new kAnonymity2(taxonomy, selectHeader, inputDataRealPath);
 		String result = mykAnonymity.run();
 
 		result.replaceAll(", ", "\n");
@@ -126,8 +123,7 @@
 	In mathematics, when the elements of some set S have a notion of equivalence (formalized as an equivalence relation) defined on them, then one may naturally split the set S into equivalence classes. These equivalence classes are constructed so that elements a and b belong to the same equivalence class if and only if a and b are equivalent.
 	
 	Formally, given a set S and an equivalence relation ~ on S, the equivalence class of an element a in S is the set</textarea>
-						<br>
-						<br>
+						<br> <br>
 					</div>
 					<h2>Enter the value of k. (Equivalent Class's num)</h2>
 					<div class="row-xs-6 row-md-6">
@@ -135,9 +131,10 @@
 							<label for="name">k Value :</label> <input type="text"
 								id="kValue" name="kValue" /> <input type="hidden"
 								value="<%=taxonomy%>" name="taxonomy" /> <input type="hidden"
-								value="<%=originalData%>" name="originalData" /> <input
-								type="hidden" value="<%=inputData%>" name="inputData" /> <input
-								type="hidden" value="<%=selectHeader%>" name="selectHeader" />
+								value="<%=inputDataRealPath%>" name="inputDataRealPath" /> <input
+								type="hidden" value="<%=inputDataName%>" name="inputDataName" />
+							<input type="hidden" value="<%=selectHeader%>"
+								name="selectHeader" />
 							<button type="submit" class="btn btn-primary pull-right">Next</button>
 						</form>
 					</div>
@@ -148,7 +145,7 @@
 
 
 	</section>
-	
+
 
 </body>
 </html>

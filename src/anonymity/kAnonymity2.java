@@ -107,7 +107,7 @@ public class kAnonymity2 {
 
 	public void loadData(String inputFileName, ArrayList<ArrayList> curTupleList) {
 		System.out.println("loadData Start!!");
-		int line_count =0;
+		int line_count = 0;
 		try {
 			FileInputStream stream = new FileInputStream(inputFileName);
 			InputStreamReader reader = new InputStreamReader(stream);
@@ -115,14 +115,12 @@ public class kAnonymity2 {
 
 			// pass header
 			String[] temp = buffer.readLine().split(",");
-
 			ArrayList<Integer> headerInt = new ArrayList<Integer>();
 
 //			System.out.println("projectionList : " + projectionList);
 
 			for (int i = 0; i < this.projectionList.size(); i++) {
 				for (int j = 0; i < temp.length; j++) {
-//					System.out.println(i + ",  " + j);
 					if (this.projectionList.get(i).equals(temp[j])) {
 						headerInt.add(j);
 						break;
@@ -130,13 +128,12 @@ public class kAnonymity2 {
 				}
 			}
 
-//			System.out.println("headerInt : " + headerInt);
-
 			int curCount = 0;
 			while (true) {
 				String[] label = buffer.readLine().split(",");
 				line_count++;
-				if(line_count>1000) break;
+				if (line_count > 1000)
+					break;
 				if (label == null)
 					break;
 
@@ -145,26 +142,19 @@ public class kAnonymity2 {
 				for (int i = 0; i < headerInt.size(); i++) {
 					curTuple.add(new Integer(label[headerInt.get(i)]));
 				}
-
-				// System.out.println("curTuple : " + curTuple);
-
-				// for (int i = 0; i < this.projectionList.size(); ++i)
-				// curTuple.add(new Integer(st.nextToken()));
 				curTupleList.add(curTuple);
 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("loadData Finish!!\n\n");
+		System.out.println("loadData Finish!!");
 	}
 
 	public void performGeneralization(ArrayList<Integer> curNode, ArrayList<ArrayList> curTupleList,
 			ArrayList<String> transfromed_curTupleList) {
-
-//		System.out.println("curTupleList : " + curTupleList);
+		System.out.println("performGeneralization Start!!");
 		int attrNumber = this.projectionList.size();
-//		System.out.println("projectionList : " + projectionList);
 		HashMap<String, ArrayList<String>> anonymizedResult = new HashMap<String, ArrayList<String>>();
 
 		for (int i = 0; i < curTupleList.size(); ++i) {
@@ -206,26 +196,25 @@ public class kAnonymity2 {
 			transfromed_curTupleList.add(tranformedStr);
 
 		}
-
+		System.out.println("performGeneralization Finish!!");
 	}
-	
 
 	//
 	public void performAnonymity() {
-
+		System.out.println("performAnonymity Start!!");
 		ArrayList<Integer> middleGL = new ArrayList<Integer>();
-
 		for (int i = 0; i < maxMap.keySet().size(); i++) {
 			int middleLevel = maxMap.get(projectionList.get(i)) / 2;
 			middleGL.add(middleLevel);
 		}
 
-//		System.out.println("middleGL : " + middleGL);
+		System.out.println("middleGL : " + middleGL);
 		performGeneralization(middleGL, this.tupleList_T1, this.transfromed_tupleList_T1);
+		System.out.println("performAnonymity Finish!!");
 
 	}
 
-	public HashMap<String, Integer> equivalent(){
+	public HashMap<String, Integer> equivalent() {
 		return equivalentClass;
 	}
 

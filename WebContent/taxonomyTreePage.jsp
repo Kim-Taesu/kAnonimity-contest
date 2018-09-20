@@ -41,8 +41,16 @@
 				selectHeader += "|";	
 			}
 		}
-		String originalData = request.getParameter("originalData");
-		String inputData = request.getParameter("inputData");
+		
+		System.out.println("!!!taxonomy Tree Page!!!");
+		
+		
+		String inputDataRealPath = request.getParameter("inputDataRealPath");
+		String inputDataName = request.getParameter("inputDataName");
+		
+		System.out.println("inputDataRealPath : " + inputDataRealPath);
+		System.out.println("inputDataName : " + inputDataName);
+		System.out.println("selectHeader : " + selectHeader);
 	%>
 	
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
@@ -107,8 +115,8 @@ gender|1|0_2
 						<h2>Taxonomy Tree</h2>
 						<textarea class="form-control col-sm-8" cols="100" rows="15" name="taxonomy"></textarea>
 						<input type="hidden" value="<%=selectHeader%>" name="selectHeader" />
-						<input type="hidden" value="<%=originalData%>" name="originalData" />
-						<input type="hidden" value="<%=inputData%>" name="inputData" />		
+						<input type="hidden" value="<%=inputDataRealPath%>" name="inputDataRealPath" />
+						<input type="hidden" value="<%=inputDataName%>" name="inputDataName" />		
 						<br>
 						<input type="submit" class="btn btn-primary" value="Sampling Start!" />
 					</form>

@@ -110,7 +110,7 @@
 					
 					<div class="container" style="float: left; width:100%">
 						<h2 class="mb-1">Select your data (*.csv)</h2>
-						<form method="POST" action="fileUpload.jsp" enctype="multipart/form-data">
+						<form method="POST" action="quasiIdentifierPage.jsp" enctype="multipart/form-data">
 							<!-- COMPONENT START -->
 							<!-- <div class="form-group">
 								<div class="input-group input-file" name="Ficher1">

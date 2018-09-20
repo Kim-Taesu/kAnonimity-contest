@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.io.*"%>
+<%@ page import="java.util.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -82,26 +83,27 @@
 		<div class="row">
 
 			<div class="col-xs-12 col-md-6">
-				<h2>Load data to HDFS</h2>
+				<h2>Anonymized Data Sample</h2>
 
 				<%
 					String userID = null;
 					if (session.getAttribute("userID") != null) {
 						userID = (String) session.getAttribute("userID");
 					}
-					String kValue = request.getParameter("kValue");
-					String header = request.getParameter("header");
-					String taxonomy = request.getParameter("taxonomy");
-					String filePath = request.getParameter("originalData");
-					String output = request.getParameter("filename");
-					String downloadPath = "/lg_project/output/" + output;
-					String fileName = "/home/hp/eclipse-web/SWDevelopment/taxonomy/gtree.txt";
 
-					System.out.println("downloadPath : " + downloadPath);
+					System.out.println("!!!submit Page!!!");
+
+					String kValue = request.getParameter("kValue");
+					String selectHeader = request.getParameter("selectHeader");
+					String taxonomy = request.getParameter("taxonomy");
+					String inputDataRealPath = request.getParameter("inputDataRealPath");
+					String inputDataName = request.getParameter("inputDataName");
+					String downloadPathInHdfs = "/lg_project/output/" + inputDataName;
+					String gtreeFilePath = "/home/hp/eclipse-web/SWDevelopment/taxonomy/gtree.txt";
 
 					//make gTree.txt
 					try {
-						File file = new File(fileName);
+						File file = new File(gtreeFilePath);
 
 						if (file.exists()) {
 							if (file.delete()) {
@@ -119,7 +121,7 @@
 
 					Process process2 = null;
 					try {
-						String command = "hadoop fs -put " + filePath + " /lg_project/data/";
+						String command = "hadoop fs -put " + inputDataRealPath + " /lg_project/data/";
 						System.out.println("command : " + command);
 						process2 = Runtime.getRuntime().exec(command);
 						process2.waitFor();
@@ -132,8 +134,8 @@
 					try {
 						long start = System.currentTimeMillis();
 						String command = "time spark-submit --class com.kAnonymity_maven.kAnonymity_project --master yarn --deploy-mode cluster --driver-memory 10g --executor-memory 10g --executor-cores 4 "
-								+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar " + kValue + "  /lg_project/data/" + output
-								+ " " + header + " " + fileName + " " + output + " 10";
+								+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar " + kValue + "  /lg_project/data/"
+								+ inputDataName + " " + selectHeader + " " + gtreeFilePath + " " + inputDataName + " 10";
 						process = Runtime.getRuntime().exec(command);
 						process.waitFor();
 						process.destroy();
@@ -142,8 +144,7 @@
 
 						double running_time = (end - start) / 1000.0;
 						out.println("running time : " + running_time);
-						out.println("<br><br>");
-						out.println("<Strong>Your Anonymized Data Sample..!</Strong><br>");
+						out.println("<br>");
 					} catch (Exception e) {
 						out.println("Error : " + e);
 					}
@@ -153,7 +154,7 @@
 
 					Process ps = null;
 					try {
-						String command = "hadoop fs -cat /lg_project/output/" + output + "/*";
+						String command = "hadoop fs -cat /lg_project/output/" + inputDataName + "/*";
 						ps = Runtime.getRuntime().exec(command);
 						BufferedReader br = new BufferedReader(
 								new InputStreamReader(new SequenceInputStream(ps.getInputStream(), ps.getErrorStream())));
@@ -178,18 +179,49 @@
 
 			<div class="col-xs-6 col-md-6">
 
-				<h2>Taxonomy Tree</h2>
-
-				<textarea class="form-control col-sm-6" cols="100" rows="20"
-					name="taxonomy"><%=taxonomy%></textarea>
+				<h3>Anonymized Data File Path in HDFS</h3>
+				<%=downloadPathInHdfs%>
 				<br>
 
+				<h3>Taxonomy File Path in server</h3>
+				<%=gtreeFilePath%>
+				<br>
+				<h3>Data File Real Path in server</h3>
+				<%=inputDataRealPath%>
+				<br>
 
+				<script>
+					function dataDelete() {
+						alert('Data can not be recovered');
+				<%Process pro = null;
+			try {
+				String command = "rm -r " + gtreeFilePath + " ; rm -r " + inputDataRealPath + " ; hadoop fs -rm -r "
+						+ downloadPathInHdfs;
+				out.println("delete command : " + command);
+
+				pro = Runtime.getRuntime().exec(command);
+				pro.waitFor();
+				pro.destroy();
+			} catch (Exception e) {
+				out.println("Error : " + e);
+			}%>
+					alert('Data Delete!');
+
+					}
+				</script>
+
+				<br> <input type="button" value="Data Delete"
+					class="btn btn-danger" onclick="dataDelete()" /> <br>
+				<br>
+				<br>
+				<br>
+				<br>
 				<form method="post" action="downloadPage.jsp">
-					<button type="submit" class="btn btn-primary pull-right">Download
+					<button type="submit" class="btn btn-primary">Download
 						File</button>
-					<input type="hidden" value="<%=downloadPath%>" name="downloadPath" />
-					<input type="hidden" value="<%=output%>" name="output" />
+					<input type="hidden" value="<%=downloadPathInHdfs%>"
+						name="downloadPathInHdfs" /> <input type="hidden"
+						value="<%=inputDataName%>" name="inputDataName" />
 
 				</form>
 			</div>

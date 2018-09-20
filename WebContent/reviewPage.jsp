@@ -36,21 +36,27 @@
 			userID = (String) session.getAttribute("userID");
 		}
 
+		System.out.println("!!!review page!!!");
+		
 		String taxonomy = request.getParameter("taxonomy");
-		String filePath = request.getParameter("originalData");
-		String[] originalData_Temp = filePath.split("/");
-		String originalData = originalData_Temp[originalData_Temp.length - 1];
+		String inputDataRealPath = request.getParameter("inputDataRealPath");
+		String inputDataName = request.getParameter("inputDataName");
 		String kValue = request.getParameter("kValue");
-
-		String header = request.getParameter("selectHeader");
+		String selectHeader = request.getParameter("selectHeader");
 		
 		Process process = null;
 		BufferedReader in = null;
 		BufferedReader err = null;
 
+		System.out.println("taxonomy : " + taxonomy);
+		System.out.println("inputDataRealPath : " + inputDataRealPath);
+		System.out.println("inputDataName : " + inputDataName);
+		System.out.println("kValue : " + kValue);
+		System.out.println("selectHeader : " + selectHeader);
+		
 		try {
 			
-			String command = "hadoop fs -put " + filePath + " /lg_project/data/";
+			String command = "hadoop fs -put " + inputDataRealPath + " /lg_project/data/";
 			process = Runtime.getRuntime().exec(command);
 
 			
@@ -121,7 +127,7 @@
 					<h2 class="mb-3">Data Input (Your Data)</h2>
 					<div class="row-xs-12 row-md-6">
 						<div class="subheading mb-1">
-          					<%=originalData%>
+          					<%=inputDataName%>
           				</div>
 						<br><br>
 					</div>
@@ -129,7 +135,7 @@
 					<h2 class="mb-3">Selected Quasi Data</h2>
 					<div class="row-xs-6 row-md-6">
 						<div class="subheading mb-1">
-							<%=header%>
+							<%=selectHeader%>
 						</div>
 						<br><br>
 					</div>
@@ -150,9 +156,9 @@
 					<form method="post" action="submitPage.jsp">
 						<input type="hidden" value="<%=kValue%>" name="kValue" /> <input
 							type="hidden" value="<%=taxonomy%>" name="taxonomy" /> <input
-							type="hidden" value="<%=filePath%>" name="originalData" /> <input
-							type="hidden" value="<%=header%>" name="header" /><input
-							type="hidden" value="<%=originalData%>" name="filename" />
+							type="hidden" value="<%=inputDataRealPath%>" name="inputDataRealPath" /> <input
+							type="hidden" value="<%=selectHeader%>" name="selectHeader" /><input
+							type="hidden" value="<%=inputDataName%>" name="inputDataName" />
 						<button type="submit" class="btn btn-danger">Submit</button>
 					</form>
 

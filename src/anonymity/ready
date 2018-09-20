@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm kAnonymity2.class
+
+javac kAnonymity2.java
+
+rm ../../WebContent/WEB-INF/classes/anonymity/kAnonymity2.class
+
+cp kAnonymity2.class ../../WebContent/WEB-INF/classes/anonymity/
+
+rm ../../WebContent/spark_output/data/WEB-INF/classes/anonymity/kAnonymity2.class
+
+cp kAnonymity2.class ../../WebContent/spark_output/data/WEB-INF/classes/anonymity/kAnonymity2.class
+

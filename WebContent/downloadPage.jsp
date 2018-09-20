@@ -83,14 +83,14 @@
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
-		String path = request.getParameter("downloadPath");
-		String output = request.getParameter("output");
-		out.println("Path in HDFS : " + path);
+		String downloadPathInHdfs = request.getParameter("downloadPathInHdfs");
+		String inputDataName = request.getParameter("inputDataName");
+		out.println("Path in HDFS : " + downloadPathInHdfs);
 		Process process = null;
 		try {
 			long start = System.currentTimeMillis();
 
-			String command = "hadoop fs -getmerge " + path + " " + ". " + output;
+			String command = "hadoop fs -getmerge " + downloadPathInHdfs + " " + ". " + inputDataName;
 			System.out.println("command : " + command);
 			//String command = "hadoop fs -getmerge " + path + "/* /home/hp/eclipse-web/SWDevelopment/spark_output/ " + output;
 			process = Runtime.getRuntime().exec(command);
@@ -106,7 +106,7 @@
 
 		// a태그의 href로 fileDown1.jsp?file_name="<%=fileName1 을 통해 전달한
 		// 중복 방지 처리한 파일명 값을 가져온다.
-		String fileName = "Anonymized_" + output;
+		String fileName = "Anonymized_" + inputDataName;
 
 		// 업로드한 폴더의 위치와 업로드 폴더의 이름을 알아야 한다.
 		String savePath = server_path; // WebContent/uploadFile
@@ -118,7 +118,7 @@
 
 		// 저장되어 있는 폴더경로/저장된 파일명 으로 풀 path를 만들어준다.
 		// 자바에서는 \를 표시하기 위해서는 \를 한번 더 붙여주기 때문에 \\로 해준다.
-		String sFilePath = server_path + output; // ex)c:\\uploadPath\\image.jpg
+		String sFilePath = server_path + inputDataName; // ex)c:\\uploadPath\\image.jpg
 		System.out.println("Full File Path : " + sFilePath);
 		// 풀 path에 대한걸 파일 객체로 인식시킨다.
 		File outputFile = new File(sFilePath);
