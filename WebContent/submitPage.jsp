@@ -213,9 +213,6 @@
 				<br> <input type="button" value="Data Delete"
 					class="btn btn-danger" onclick="dataDelete()" /> <br>
 				<br>
-				<br>
-				<br>
-				<br>
 				<form method="post" action="downloadPage.jsp">
 					<button type="submit" class="btn btn-primary">Download
 						File</button>
@@ -223,6 +220,12 @@
 						name="downloadPathInHdfs" /> <input type="hidden"
 						value="<%=inputDataName%>" name="inputDataName" />
 
+				</form>
+				
+				<br><br><br><br>
+				
+				<form method="post" action="finishPage.jsp">
+					<button type="submit" class="btn btn-primary">Next</button>
 				</form>
 			</div>
 
