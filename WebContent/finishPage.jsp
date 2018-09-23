@@ -63,15 +63,17 @@
 			<div class="subheading mb-1">Congratulation! Your data has been
 				anonymized using k-Anonymization</div>
 		</div>
+
+
+		<br> <br> <br>
+
+		<form method="post" action="main.jsp">
+			<button type="submit" class="btn btn-primary">home</button>
+
+		</form>
 	</section>
 
-	<br>
-	<br>
-	<br>
-	<form method="post" action="main.jsp">
-		<button type="submit" class="btn btn-primary">home</button>
 
-	</form>
 
 </body>
 </html>

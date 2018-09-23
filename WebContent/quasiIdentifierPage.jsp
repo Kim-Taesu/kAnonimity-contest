@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.util.*"%>
-<%@page import="java.io.File"%>
+<%@page import="java.io.*"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
@@ -70,9 +70,17 @@
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<String> lines = Files.readAllLines(Paths.get(uploadPath.concat("/").concat(inputDataName)));
 		
-		inputDataHeader = lines.get(0).toString();
+		 try {
+		      BufferedReader in = new BufferedReader(new FileReader(uploadPath.concat("/").concat(inputDataName)));
+		      inputDataHeader = in.readLine();
+		      in.close();
+		    } catch (IOException e) {
+		        System.err.println(e); // 에러가 있다면 메시지 출력
+		        System.exit(1);
+		    }
+		
+		
 		String inputDataRealPath = uploadPath;
 		inputDataRealPath += "/";
 		inputDataRealPath += inputDataName;

@@ -93,7 +93,7 @@
 				String inputDataName = request.getParameter("inputDataName");
 				String kValue = request.getParameter("kValue");
 
-				out.println("Path in HDFS : " + downloadPathInHdfs);
+				System.out.println("Path in HDFS : " + downloadPathInHdfs);
 				Process process = null;
 				try {
 					long start = System.currentTimeMillis();
@@ -127,7 +127,7 @@
 
 				// 저장되어 있는 폴더경로/저장된 파일명 으로 풀 path를 만들어준다.
 				// 자바에서는 \를 표시하기 위해서는 \를 한번 더 붙여주기 때문에 \\로 해준다.
-				String sFilePath = server_path + inputDataName; // ex)c:\\uploadPath\\image.jpg
+				String sFilePath = server_path + "kvalue_" + kValue + "_" + date.format(today) + "_" + inputDataName; // ex)c:\\uploadPath\\image.jpg
 				System.out.println("Full File Path : " + sFilePath);
 				// 풀 path에 대한걸 파일 객체로 인식시킨다.
 				File outputFile = new File(sFilePath);

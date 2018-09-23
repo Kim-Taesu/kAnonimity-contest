@@ -104,8 +104,8 @@
 					String taxonomy = request.getParameter("taxonomy");
 					String inputDataRealPath = request.getParameter("inputDataRealPath");
 					String inputDataName = request.getParameter("inputDataName");
-					String downloadPathInHdfs = "/lg_project/output/" + inputDataName + "_kvalue_" + kValue + "_"
-							+ date.format(today);
+					String downloadPathInHdfs = "/lg_project/output/" + "kvalue_" + kValue + "_" + date.format(today) + "_"
+							+ inputDataName;
 					String gtreeFilePath = "/home/hp/eclipse-web/SWDevelopment/taxonomy/gtree.txt";
 
 					//make gTree.txt
