@@ -107,7 +107,7 @@
             <a class="nav-link js-scroll-trigger" href="reviewPage.jsp">Review</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Download</a>
+            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Submit &amp; Download</a>
           </li>
         </ul>
       </div>
@@ -140,7 +140,7 @@
 						<br><br>
 					</div>
 
-					<h2 class="mb-3">K Value (Equivalent class num)</h2>
+					<h2 class="mb-3">K Value <br>(Equivalent class num)</h2>
 					<div class="row-xs-6 row-md-6">
 						<table style="width: 20%; text-align: center">
 							<tr style="background-color: lightgrey;">

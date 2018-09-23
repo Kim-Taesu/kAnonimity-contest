@@ -36,8 +36,6 @@
 		if (session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
-
-		
 	%>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
@@ -53,25 +51,7 @@
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="main.jsp">Start</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="dataInputPage.jsp">Data Input</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="quasiIdentifierPage.jsp">Quasi-Identifier</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="taxonomyTreePage.jsp">Taxonomy tree</a></li>
-				<li class="nav-item active"><a
-					class="nav-link js-scroll-trigger" href="examplePage.jsp">Example</a>
-				</li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="reviewPage.jsp">Review</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="downloadPage.jsp">Download</a></li>
-			</ul>
-		</div>
+
 	</nav>
 
 	<hr class="m-0">
@@ -80,17 +60,18 @@
 		id="Example">
 		<div class="my-auto">
 			<h1>Finish!</h1>
-			<div class="subheading mb-1">
-				Congratulation! Your data has been anonymized using k-Anonymization 
-
-			</div>
-			
+			<div class="subheading mb-1">Congratulation! Your data has been
+				anonymized using k-Anonymization</div>
 		</div>
-
-
-
 	</section>
 
+	<br>
+	<br>
+	<br>
+	<form method="post" action="main.jsp">
+		<button type="submit" class="btn btn-primary">home</button>
+
+	</form>
 
 </body>
 </html>

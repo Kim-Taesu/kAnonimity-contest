@@ -66,24 +66,13 @@
 				// 그 파일 객체의 크기를 알아냄
 				fileSize = file.length();
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		List<String> lines = Files.readAllLines(Paths.get(uploadPath.concat("/").concat(inputDataName)));
-
-		//파일 읽기
-		try {
-			for (String line : lines) {
-				line = line.replace(",", "|");
-				//String result = line.split(",");
-				//for(String s : result) {
-			}
-			//System.out.println(lines.get(0).toString());
-			inputDataHeader = lines.get(0).toString();
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		
+		inputDataHeader = lines.get(0).toString();
 		String inputDataRealPath = uploadPath;
 		inputDataRealPath += "/";
 		inputDataRealPath += inputDataName;
@@ -200,8 +189,7 @@
 					href="examplePage.jsp">Example</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="reviewPage.jsp">Review</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="downloadPage.jsp">Download</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Submit &amp; Download</a>
 			</ul>
 		</div>
 	</nav>

@@ -36,10 +36,11 @@
 		String[] arr = request.getParameterValues("checked");
 		String selectHeader = "";
 		for(int i=0; i<arr.length; i++){
-			selectHeader += arr[i];
-			if(i < arr.length-1){
-				selectHeader += "|";	
+			if(i==arr.length-1){
+				selectHeader += arr[i];
+				break;
 			}
+			selectHeader += arr[i] + ",";
 		}
 		
 		System.out.println("!!!taxonomy Tree Page!!!");
@@ -84,7 +85,7 @@
             <a class="nav-link js-scroll-trigger" href="reviewPage.jsp">Review</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Download</a>
+            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Submit &amp; Download</a>
           </li>
         </ul>
       </div>

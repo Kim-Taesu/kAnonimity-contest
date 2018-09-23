@@ -86,8 +86,7 @@
 				</li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="reviewPage.jsp">Review</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="downloadPage.jsp">Download</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Submit &amp; Download</a>
 			</ul>
 		</div>
 	</nav>
@@ -99,7 +98,7 @@
 		<div class="my-auto">
 			<h1>Example</h1>
 			<div class="subheading mb-1">
-				Time to Anonymize Sample data <br>
+				Time to Anonymize Sample data (1000 line)<br>
 				<%=(end - start) / 1000.0 + " sec"%>
 			</div>
 			<div class="row">
@@ -109,7 +108,7 @@
 						<textarea id="inputbox" cols="70" rows="9"><%=result%></textarea>
 						<br> <br>
 					</div>
-					<h2>Sample Data's Equivalent Class</h2>
+					<h2>Sample Data's <br>Equivalent Class</h2>
 					<div class="row-xs-6 row-md-6">
 						<textarea id="inputbox" cols="70" rows="9"><%=equivalent%></textarea>
 					</div>

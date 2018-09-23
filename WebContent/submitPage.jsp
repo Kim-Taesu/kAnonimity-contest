@@ -4,6 +4,8 @@
 <%@ page import="java.io.PrintWriter"%>
 <%@ page import="java.io.*"%>
 <%@ page import="java.util.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 
 <!DOCTYPE html>
 <html>
@@ -59,10 +61,11 @@
 					href="taxonomyTreePage.jsp">Taxonomy tree</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
 					href="examplePage.jsp">Example</a></li>
-				<li class="nav-item active"><a
-					class="nav-link js-scroll-trigger" href="reviewPage.jsp">Review</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="downloadPage.jsp">Download</a></li>
+					href="reviewPage.jsp">Review</a></li>
+				<li class="nav-item active"><a
+					class="nav-link js-scroll-trigger" href="downloadPage.jsp">Submit
+						&amp; Download</a>
 			</ul>
 		</div>
 	</nav>
@@ -91,6 +94,9 @@
 						userID = (String) session.getAttribute("userID");
 					}
 
+					Date today = new Date();
+					SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+
 					System.out.println("!!!submit Page!!!");
 
 					String kValue = request.getParameter("kValue");
@@ -98,7 +104,8 @@
 					String taxonomy = request.getParameter("taxonomy");
 					String inputDataRealPath = request.getParameter("inputDataRealPath");
 					String inputDataName = request.getParameter("inputDataName");
-					String downloadPathInHdfs = "/lg_project/output/" + inputDataName;
+					String downloadPathInHdfs = "/lg_project/output/" + inputDataName + "_kvalue_" + kValue + "_"
+							+ date.format(today);
 					String gtreeFilePath = "/home/hp/eclipse-web/SWDevelopment/taxonomy/gtree.txt";
 
 					//make gTree.txt
@@ -154,7 +161,8 @@
 
 					Process ps = null;
 					try {
-						String command = "hadoop fs -cat /lg_project/output/" + inputDataName + "/*";
+						String command = "hadoop fs -cat /lg_project/output/" + "kvalue_" + kValue + "_" + date.format(today)
+								+ "_" + inputDataName + "/*";
 						ps = Runtime.getRuntime().exec(command);
 						BufferedReader br = new BufferedReader(
 								new InputStreamReader(new SequenceInputStream(ps.getInputStream(), ps.getErrorStream())));
@@ -190,40 +198,19 @@
 				<%=inputDataRealPath%>
 				<br>
 
-				<script>
-					function dataDelete() {
-						alert('Data can not be recovered');
-				<%Process pro = null;
-			try {
-				String command = "rm -r " + gtreeFilePath + " ; rm -r " + inputDataRealPath + " ; hadoop fs -rm -r "
-						+ downloadPathInHdfs;
-				out.println("delete command : " + command);
 
-				pro = Runtime.getRuntime().exec(command);
-				pro.waitFor();
-				pro.destroy();
-			} catch (Exception e) {
-				out.println("Error : " + e);
-			}%>
-					alert('Data Delete!');
-
-					}
-				</script>
-
-				<br> <input type="button" value="Data Delete"
-					class="btn btn-danger" onclick="dataDelete()" /> <br>
-				<br>
 				<form method="post" action="downloadPage.jsp">
 					<button type="submit" class="btn btn-primary">Download
 						File</button>
 					<input type="hidden" value="<%=downloadPathInHdfs%>"
 						name="downloadPathInHdfs" /> <input type="hidden"
-						value="<%=inputDataName%>" name="inputDataName" />
+						value="<%=inputDataName%>" name="inputDataName" /> <input
+						type="hidden" value="<%=kValue%>" name="kValue" />
 
 				</form>
-				
-				<br><br><br><br>
-				
+
+				<br> <br> <br> <br>
+
 				<form method="post" action="finishPage.jsp">
 					<button type="submit" class="btn btn-primary">Next</button>
 				</form>

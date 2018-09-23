@@ -93,7 +93,7 @@ public class kAnonymity2 {
 	private ArrayList<Integer> fitNode;
 
 	public kAnonymity2(String Taxonomy, String header, String dataFilePath) {
-		StringTokenizer headerToken = new StringTokenizer(header, "|");
+		StringTokenizer headerToken = new StringTokenizer(header, ",");
 
 		while (headerToken.hasMoreElements()) {
 			this.projectionList.add(headerToken.nextToken());

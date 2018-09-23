@@ -67,7 +67,7 @@
             <a class="nav-link js-scroll-trigger" href="reviewPage.jsp">Review</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Download</a>
+            <a class="nav-link js-scroll-trigger" href="downloadPage.jsp">Submit &amp; Download</a>
           </li>
         </ul>
       </div>

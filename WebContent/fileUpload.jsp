@@ -119,28 +119,13 @@
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<String> lines = Files.readAllLines(Paths.get(uploadPath.concat("/").concat(inputDataName)));
-
-		//파일 읽기
-		try {
-			for (String line : lines) {
-				line = line.replace(",", "|");
-				//String result = line.split(",");
-				//for(String s : result) {
-			}
-			//System.out.println(lines.get(0).toString());
-			inputDataHeader = lines.get(0).toString();
-
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		
 		String inputDataRealPath = uploadPath;
 		inputDataRealPath += "/";
 		inputDataRealPath += inputDataName;
 
 		System.out.println("!!!File Upload Page!!!");
 		System.out.println("inputDataName = " + inputDataName);
-		System.out.println("inputDataHeader = " + inputDataHeader);
 		System.out.println("inputDataRealPath = " + inputDataRealPath);
 	%><br>
 
@@ -156,9 +141,7 @@
 					name="fileCheckFormName">
 					<input type="hidden" value="<%=inputDataName%>"
 						name="inputDataName" /> <input type="hidden"
-						value="<%=inputDataRealPath%>" name="inputDataRealPath" /> <input
-						type="hidden" value="<%=inputDataHeader%>"
-						name="inputDataHeader" />
+						value="<%=inputDataRealPath%>" name="inputDataRealPath" /> 
 					<button type="submit" class="btn btn-primary">Next</button>
 				</form>
 			</div>

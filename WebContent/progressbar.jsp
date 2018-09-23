@@ -50,7 +50,7 @@
 	</table>
 	<%
 		int start = 0;
-		int end = 100;
+		int end = 1000;
 		for (int i = start; i < end; i++) {
 			out.println("<script>go(" + i + "," + end + ")</script>");
 
