@@ -70,23 +70,24 @@
 		</div>
 	</nav>
 
-	<script>
-		alert("complete!!!");
-	</script>
-
-
 	<hr class="m-0">
 
 	<section class="resume-section p-3 p-lg-5 d-flex flex-column"
 		id="Review">
 		<div class="my-auto">
-			<h1 class="mb-5">Download</h1>
+			<h1 class="mb-5">Delete Finished!</h1>
+
+			<div class="subheading mb-1">Delete your taxonomyFile and
+				inputData in our server and HDFS</div>
+			<br>
+			<h3>Congratulation! Your data has been anonymized using
+				k-Anonymization</h3>
 		</div>
 
 		<div class="row">
 
 			<div class="col-xs-12 col-md-6">
-				<h2>Anonymized Data Sample</h2>
+
 
 				<%
 					String userID = null;
@@ -97,18 +98,19 @@
 					Date today = new Date();
 					SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
 
-					System.out.println("\n\n!!!submit Page!!!");
+					System.out.println("\n\n!!!delete Page!!!");
 
-					String kValue = request.getParameter("kValue");
-					String selectHeader = request.getParameter("selectHeader");
-					String taxonomy = request.getParameter("taxonomy");
-					String inputDataRealPath = request.getParameter("inputDataRealPath");
+					String downloadPathInHdfs = request.getParameter("downloadPathInHdfs");
 					String inputDataName = request.getParameter("inputDataName");
-					String downloadPathInHdfs = "/lg_project/output/" + "kvalue_" + kValue + "_" + date.format(today) + "_"
-							+ inputDataName;
-					String gtreeFilePath = "/home/hp/eclipse-web/SWDevelopment/taxonomy/gtree.txt";
+					String inputDataPathInHdfs = "/lg_project/data/" + inputDataName;
+					String gtreeFilePath = request.getParameter("gtreeFilePath");
+					String inputDataRealPath = request.getParameter("inputDataRealPath");
 
-					//make gTree.txt
+					System.out.println("inputDataPathInHdfs : " + inputDataPathInHdfs);
+					System.out.println("gtreeFilePath : " + gtreeFilePath);
+					System.out.println("inputDataRealPath : " + inputDataRealPath);
+
+					//delete gTree.txt
 					try {
 						File file = new File(gtreeFilePath);
 
@@ -117,114 +119,39 @@
 								System.out.println("파일삭제 성공");
 							}
 						}
-						FileWriter fw = new FileWriter(file, true);
-						fw.write(taxonomy);
-						fw.flush();
-						fw.close();
-
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 
 					Process process = null;
-					String line = "";
-					int lineCount = 0;
 					try {
 						long start = System.currentTimeMillis();
-						String command = "time /home/hp/spark-2.3.0-bin-hadoop2.7/bin/spark-submit --class com.kAnonymity_maven.kAnonymity_project --master yarn --deploy-mode cluster --driver-memory 10g --executor-memory 10g --executor-cores 4 "
-								+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar " + kValue + "  /lg_project/data/"
-								+ inputDataName + " " + selectHeader + " " + gtreeFilePath + " " + inputDataName + " 10";
-						//String command = "pwd";
-
-						System.out.println("Spark command : " + command);
+						String command = "rm -r " + " " + gtreeFilePath + ";rm -r " + " " + inputDataRealPath;
 						process = Runtime.getRuntime().exec(command);
 
 						process.waitFor();
 						process.destroy();
-						System.out.println("spark submit finish!!");
-						long end = System.currentTimeMillis();
-
-						double running_time = (end - start) / 1000.0;
-						out.println("running time : " + running_time);
-						out.println("<br>");
 					} catch (Exception e) {
 						out.println("Error : " + e);
 					}
 
-					Process ps = null;
+					Process process2 = null;
 					try {
-						String command = "hadoop fs -cat /lg_project/output/" + "kvalue_" + kValue + "_" + date.format(today)
-								+ "_" + inputDataName + "/*";
+						long start = System.currentTimeMillis();
+						String command = "/home/hp/hadoop-2.8.4/bin/hadoop fs -rm -r " + inputDataPathInHdfs;
+						process2 = Runtime.getRuntime().exec(command);
+						process2.waitFor();
+						process2.destroy();
 
-						ps = Runtime.getRuntime().exec(command);
-						System.out.println("upload data to HDFS finish!!");
-						BufferedReader br = new BufferedReader(
-								new InputStreamReader(new SequenceInputStream(ps.getInputStream(), ps.getErrorStream())));
-						while ((line = br.readLine()) != null) {
-							lineCount++;
-							if (lineCount > 20)
-								break;
-				%>
-				<i><%=line%></i><br>
-				<%
-					ps.destroy();
-						}
-						br.close();
-					} catch (IOException ie) {
-						ie.printStackTrace();
 					} catch (Exception e) {
-						e.printStackTrace();
+						out.println("Error : " + e);
 					}
 				%>
-			</div>
-
-
-			<div class="col-xs-6 col-md-6">
-
-				<h3>Anonymized Data File Path in HDFS</h3>
-				<%=downloadPathInHdfs%>
-				<br>
-
-				<h3>Taxonomy File Path in server</h3>
-				<%=gtreeFilePath%>
-				<br>
-				<h3>Data File Real Path in server</h3>
-				<%=inputDataRealPath%>
-				<br> <br> <br>
-
-				<h3>Download Anonymized Data</h3>
-				<form method="post" action="downloadPage.jsp">
-					<button type="submit" class="btn btn-primary">Download</button>
-					<input type="hidden" value="<%=downloadPathInHdfs%>"
-						name="downloadPathInHdfs" /> <input type="hidden"
-						value="<%=inputDataName%>" name="inputDataName" /> <input
-						type="hidden" value="<%=kValue%>" name="kValue" />
-
-				</form>
-
-				<br> <br> <br>
-				<h3>If You Want delete Original Data in Our Server.....</h3>
-				<br>
-
-				<form method="post" action="deletePage.jsp">
-					<button type="submit" class="btn btn-primary">Yes</button>
-					<input type="hidden" value="<%=downloadPathInHdfs%>"
-						name="downloadPathInHdfs" /> <input type="hidden"
-						value="<%=inputDataName%>" name="inputDataName" /><input
-						type="hidden" value="<%=gtreeFilePath%>" name="gtreeFilePath" />
-					<input type="hidden" value="<%=inputDataRealPath%>"
-						name="inputDataRealPath" />
-				</form>
-
-				<br>
-				<form method="post" action="finishPage.jsp">
-					<button type="submit" class="btn btn-danger">No</button>
+			
+			<form method="post" action="main.jsp">
+					<button type="submit" class="btn btn-primary">home</button>
 				</form>
 			</div>
-
-
-		</div>
-
 
 		</div>
 	</section>

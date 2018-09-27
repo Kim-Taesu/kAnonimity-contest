@@ -1,0 +1,4 @@
+#!/bin/bash	
+
+
+hadoop fs -mkdir -p /kts_temp
