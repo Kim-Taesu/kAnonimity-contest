@@ -51,21 +51,13 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="main.jsp">Start</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="dataInputPage.jsp">Data Input</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="quasiIdentifierPage.jsp">Quasi-Identifier</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="taxonomyTreePage.jsp">Taxonomy tree</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="examplePage.jsp">Example</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger"
-					href="reviewPage.jsp">Review</a></li>
-				<li class="nav-item active"><a
-					class="nav-link js-scroll-trigger" href="downloadPage.jsp">Submit
-						&amp; Download</a>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Start</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Data Input</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Quasi-Identifier</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Taxonomy tree</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Example</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Review</a></li>
+				<li class="nav-item active"><a class="nav-link js-scroll-trigger">Submit&amp; Download</a>
 			</ul>
 		</div>
 	</nav>
