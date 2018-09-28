@@ -21,75 +21,74 @@
 <title>Resume - Start Bootstrap Theme</title>
 
 <%
-		String inputDataName = request.getParameter("fileName1");
-		String uploadPath = request.getRealPath("/uploadFile");
-		//out.println("서버 내 저장 위치 : " + uploadPath + "<br/>");
+	String inputDataName = request.getParameter("fileName1");
+	String uploadPath = request.getRealPath("/uploadFile");
+	//out.println("서버 내 저장 위치 : " + uploadPath + "<br/>");
 
-		int maxSize = 1024 * 1024 * 10; // 한번에 올릴 수 있는 파일 용량 : 10M로 제한
+	int maxSize = 1024 * 1024 * 10; // 한번에 올릴 수 있는 파일 용량 : 10M로 제한
 
-		String name = "";
-		String subject = "";
+	String name = "";
+	String subject = "";
 
-		//String fileName1 = ""; // 중복처리된 이름
-		String originalName = ""; // 중복 처리전 실제 원본 이름
-		long fileSize = 0; // 파일 사이즈
-		String fileType = ""; // 파일 타입
+	//String fileName1 = ""; // 중복처리된 이름
+	String originalName = ""; // 중복 처리전 실제 원본 이름
+	long fileSize = 0; // 파일 사이즈
+	String fileType = ""; // 파일 타입
 
-		MultipartRequest multi = null;
+	MultipartRequest multi = null;
 
-		String inputDataHeader = null; //header
+	String inputDataHeader = null; //header
 
-		try {
-			// request,파일저장경로,용량,인코딩타입,중복파일명에 대한 기본 정책
-			multi = new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+	try {
+		// request,파일저장경로,용량,인코딩타입,중복파일명에 대한 기본 정책
+		multi = new MultipartRequest(request, uploadPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 
-			// form내의 input name="name" 인 녀석 value를 가져옴
-			name = multi.getParameter("name");
-			// name="subject" 인 녀석 value를 가져옴
-			subject = multi.getParameter("subject");
+		// form내의 input name="name" 인 녀석 value를 가져옴
+		name = multi.getParameter("name");
+		// name="subject" 인 녀석 value를 가져옴
+		subject = multi.getParameter("subject");
 
-			// 전송한 전체 파일이름들을 가져옴
-			Enumeration files = multi.getFileNames();
+		// 전송한 전체 파일이름들을 가져옴
+		Enumeration files = multi.getFileNames();
 
-			while (files.hasMoreElements()) {
-				// form 태그에서 <input type="file" name="여기에 지정한 이름" />을 가져온다.
-				String file1 = (String) files.nextElement(); // 파일 input에 지정한 이름을 가져옴
-				// 그에 해당하는 실재 파일 이름을 가져옴
-				originalName = multi.getOriginalFileName(file1);
-				// 파일명이 중복될 경우 중복 정책에 의해 뒤에 1,2,3 처럼 붙어 unique하게 파일명을 생성하는데
-				// 이때 생성된 이름을 filesystemName이라 하여 그 이름 정보를 가져온다.(중복에 대한 처리)
-				inputDataName = multi.getFilesystemName(file1);
-				// 파일 타입 정보를 가져옴
-				fileType = multi.getContentType(file1);
-				// input file name에 해당하는 실재 파일을 가져옴
-				File file = multi.getFile(file1);
-				// 그 파일 객체의 크기를 알아냄
-				fileSize = file.length();
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
+		while (files.hasMoreElements()) {
+			// form 태그에서 <input type="file" name="여기에 지정한 이름" />을 가져온다.
+			String file1 = (String) files.nextElement(); // 파일 input에 지정한 이름을 가져옴
+			// 그에 해당하는 실재 파일 이름을 가져옴
+			originalName = multi.getOriginalFileName(file1);
+			// 파일명이 중복될 경우 중복 정책에 의해 뒤에 1,2,3 처럼 붙어 unique하게 파일명을 생성하는데
+			// 이때 생성된 이름을 filesystemName이라 하여 그 이름 정보를 가져온다.(중복에 대한 처리)
+			inputDataName = multi.getFilesystemName(file1);
+			// 파일 타입 정보를 가져옴
+			fileType = multi.getContentType(file1);
+			// input file name에 해당하는 실재 파일을 가져옴
+			File file = multi.getFile(file1);
+			// 그 파일 객체의 크기를 알아냄
+			fileSize = file.length();
 		}
-		
-		 try {
-		      BufferedReader in = new BufferedReader(new FileReader(uploadPath.concat("/").concat(inputDataName)));
-		      inputDataHeader = in.readLine();
-		      in.close();
-		    } catch (IOException e) {
-		        System.err.println(e); // 에러가 있다면 메시지 출력
-		        System.exit(1);
-		    }
-		
-		
-		String inputDataRealPath = uploadPath;
-		inputDataRealPath += "/";
-		inputDataRealPath += inputDataName;
 
-		System.out.println("!!!File Upload Page!!!");
-		System.out.println("inputDataName = " + inputDataName);
-		System.out.println("inputDataHeader = " + inputDataHeader);
-		System.out.println("inputDataRealPath = " + inputDataRealPath);
-	%>
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	try {
+		BufferedReader in = new BufferedReader(new FileReader(uploadPath.concat("/").concat(inputDataName)));
+		inputDataHeader = in.readLine();
+		in.close();
+	} catch (IOException e) {
+		System.err.println(e); // 에러가 있다면 메시지 출력
+		System.exit(1);
+	}
+
+	String inputDataRealPath = uploadPath;
+	inputDataRealPath += "/";
+	inputDataRealPath += inputDataName;
+
+	System.out.println("!!!File Upload Page!!!");
+	System.out.println("inputDataName = " + inputDataName);
+	System.out.println("inputDataHeader = " + inputDataHeader);
+	System.out.println("inputDataRealPath = " + inputDataRealPath);
+%>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -127,7 +126,7 @@
         <%request.setCharacterEncoding("UTF-8");
 
 			System.out.println("!!!quasi Identifier Page!!!");
-			
+
 			System.out.println("inputDataRealPath : " + inputDataRealPath);
 			System.out.println("inputDataName : " + inputDataName);
 			System.out.println("inputDataHeader : " + inputDataHeader);
@@ -161,7 +160,7 @@
 
 				document.getElementById('cb').setAttribute("value", strArr[i]);
 				document.getElementById('cb').setAttribute("name", "checked");
-				document.getElementById('label').innerHTML = strArr[i];
+				document.getElementById('label').innerHTML = strArr[i].toUpperCase();
 
 				div.innerHTML = document.getElementById('dest').innerHTML;
 			}
@@ -185,12 +184,16 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link js-scroll-trigger">Start</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger">Data Input</a></li>
-				<li class="nav-item active"><a class="nav-link js-scroll-trigger">Quasi-Identifier</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger">Taxonomy tree</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Data
+						Input</a></li>
+				<li class="nav-item active"><a
+					class="nav-link js-scroll-trigger">Quasi-Identifier</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Taxonomy
+						tree</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger">Example</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger">Review</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger">Submit &amp; Download</a>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Submit
+						&amp; Download</a>
 			</ul>
 		</div>
 	</nav>
@@ -221,6 +224,7 @@
 						<h2 class="mb-2">Attribute Header</h2>
 						<div class="subheading mb-1">Select your header as a
 							quasi-identifier</div>
+						
 						<div class="container" id="dest" style="display: none;">
 							<p style="float: left; margin: 10px;">
 								<input type="checkbox" name="" value="" id="cb"><label

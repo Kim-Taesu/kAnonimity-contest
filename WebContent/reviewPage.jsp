@@ -117,7 +117,7 @@
 			<div class="row">
 
 				<div class="col-xs-12 col-md-6">
-					<h2 class="mb-3">Data Input (Your Data)</h2>
+					<h2 class="mb-3">Data Input</h2>
 					<div class="row-xs-12 row-md-6">
 						<div class="subheading mb-1">
 							<%=inputDataName%>
@@ -128,24 +128,19 @@
 					<h2 class="mb-3">Selected Quasi Data</h2>
 					<div class="row-xs-6 row-md-6">
 						<div class="subheading mb-1">
-							<%=selectHeader%>
+							<%=selectHeader.replaceAll(",", ",   ")%>
 						</div>
 						<br> <br>
 					</div>
 
 					<h2 class="mb-3">
-						K Value <br>(Equivalent class num)
+						K Value
 					</h2>
 					<div class="row-xs-6 row-md-6">
-						<table style="width: 20%; text-align: center">
-							<tr style="background-color: lightgrey;">
-								<th>K-Value</th>
-							</tr>
-							<tr>
-								<td><%=kValue%></td>
-							</tr>
-						</table>
-
+						<div class="subheading mb-0">
+							<%=kValue%>
+						</div>
+						<br> <br>
 					</div>
 					<br> <br> <br>
 					<form method="post" action="submitPage.jsp">

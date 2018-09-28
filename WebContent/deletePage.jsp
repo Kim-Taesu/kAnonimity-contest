@@ -67,11 +67,9 @@
 	<section class="resume-section p-3 p-lg-5 d-flex flex-column"
 		id="Review">
 		<div class="my-auto">
-			<h1 class="mb-5">Delete Finished!</h1>
+			<h1 class="mb-5">Finished!</h1>
 
-			<div class="subheading mb-1">Delete your taxonomyFile and
-				inputData in our server and HDFS</div>
-			<br>
+			
 			<h3>Congratulation! Your data has been anonymized using
 				k-Anonymization</h3>
 		</div>
@@ -130,10 +128,22 @@
 					Process process2 = null;
 					try {
 						long start = System.currentTimeMillis();
-						String command = "/home/hp/hadoop-2.8.4/bin/hadoop fs -rm -r " + inputDataPathInHdfs;
+						String command = "/home/hp/hadoop-2.8.4/bin/hadoop fs -rm -r /lg_project/data/*";
 						process2 = Runtime.getRuntime().exec(command);
 						process2.waitFor();
 						process2.destroy();
+
+					} catch (Exception e) {
+						out.println("Error : " + e);
+					}
+					
+					Process process3 = null;
+					try {
+						long start = System.currentTimeMillis();
+						String command = "/home/hp/hadoop-2.8.4/bin/hadoop fs -rm -r /lg_project/output/*";
+						process3 = Runtime.getRuntime().exec(command);
+						process3.waitFor();
+						process3.destroy();
 
 					} catch (Exception e) {
 						out.println("Error : " + e);

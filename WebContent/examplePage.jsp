@@ -1,3 +1,6 @@
+<%@page import="java.util.StringTokenizer"%>
+<%@page
+	import="com.sun.org.apache.xml.internal.serializer.utils.StringToIntTable"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter"%>
@@ -74,12 +77,16 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link js-scroll-trigger">Start</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger">Data Input</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Data
+						Input</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger">Quasi-Identifier</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger">Taxonomy tree</a></li>
-				<li class="nav-item active"><a class="nav-link js-scroll-trigger">Example</a></li>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Taxonomy
+						tree</a></li>
+				<li class="nav-item active"><a
+					class="nav-link js-scroll-trigger">Example</a></li>
 				<li class="nav-item"><a class="nav-link js-scroll-trigger">Review</a></li>
-				<li class="nav-item"><a class="nav-link js-scroll-trigger">Submit &amp; Download</a>
+				<li class="nav-item"><a class="nav-link js-scroll-trigger">Submit
+						&amp; Download</a>
 			</ul>
 		</div>
 	</nav>
@@ -96,29 +103,10 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<h2>Sampling Data</h2>
-					<div class="row-xs-12 row-md-6">
-						<textarea id="inputbox" cols="70" rows="9"><%=result%></textarea>
-						<br> <br>
-					</div>
-					<h2>Sample Data's <br>Equivalent Class</h2>
-					<div class="row-xs-6 row-md-6">
-						<textarea id="inputbox" cols="70" rows="9"><%=equivalent%></textarea>
-					</div>
-				</div>
+					<h2>Enter the value of k.</h2>
+					<h3>(Equivalent Class's num)</h3>
+					<div class="row-xs-12 row-md-8">
 
-				<div class="col-xs-12 col-md-6">
-					<h2>What is Equivalent Class?</h2>
-					<div class="row-xs-12 row-md-6">
-						<textarea id="inputbox" cols="80" rows="9">
-	Congruence is an example of an equivalence relation. The leftmost two triangles are congruent, while the third and fourth triangles are not congruent to any other triangle shown here. Thus, the first two triangles are in the same equivalence class, while the third and fourth triangles are each in their own equivalence class.
-	In mathematics, when the elements of some set S have a notion of equivalence (formalized as an equivalence relation) defined on them, then one may naturally split the set S into equivalence classes. These equivalence classes are constructed so that elements a and b belong to the same equivalence class if and only if a and b are equivalent.
-	
-	Formally, given a set S and an equivalence relation ~ on S, the equivalence class of an element a in S is the set</textarea>
-						<br> <br>
-					</div>
-					<h2>Enter the value of k. (Equivalent Class's num)</h2>
-					<div class="row-xs-6 row-md-6">
 						<form method="post" action="reviewPage.jsp">
 							<label for="name">k Value :</label> <input type="text"
 								id="kValue" name="kValue" /> <input type="hidden"
@@ -129,6 +117,41 @@
 								name="selectHeader" />
 							<button type="submit" class="btn btn-primary pull-right">Next</button>
 						</form>
+					</div>
+					<br> <br> <br>
+					<h2>What is Equivalent Class?</h2>
+					<div class="row-xs-6 row-md-6">
+						<img src="/WebContent/img/equivalent.png" width="700" alt="data example" />
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample Equivalent Class</h2>
+					<div class="col-xs-12 col-md-2">
+						<table border="1"	style="margin-left: 200px; margin-right: auto; text-align: center;">
+							<tr>
+								<th>Equivalent Class</th>
+								<th>Num</th>
+							</tr>
+
+							<%
+								StringTokenizer key_token = new StringTokenizer(equivalent.keySet().toString(), ",");
+								StringTokenizer value_token = new StringTokenizer(equivalent.values().toString(), ",");
+
+								while (key_token.hasMoreElements()) {
+									String key = key_token.nextToken().substring(2);
+									String value = value_token.nextToken().substring(1);
+
+									if (!key_token.hasMoreElements()) {
+										key = key.substring(0, key.length() - 1);
+										value = value.substring(0, value.length() - 1);
+									}
+
+									out.println("<tr><th> " + key + " </th><th> " + value + " </th></tr>");
+								}
+							%>
+
+						</table>
 					</div>
 				</div>
 			</div>

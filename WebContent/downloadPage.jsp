@@ -97,7 +97,7 @@
 				Process process = null;
 				try {
 					long start = System.currentTimeMillis();
-
+					
 					String command = "hadoop fs -getmerge " + downloadPathInHdfs + " " + ". " + "kvalue_" + kValue + "_"
 							+ date.format(today) + "_" + inputDataName;
 					System.out.println("command : " + command);

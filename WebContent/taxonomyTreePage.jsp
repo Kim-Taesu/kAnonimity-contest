@@ -52,6 +52,8 @@
 		System.out.println("inputDataRealPath : " + inputDataRealPath);
 		System.out.println("inputDataName : " + inputDataName);
 		System.out.println("selectHeader : " + selectHeader);
+		
+		
 	%>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
@@ -87,7 +89,14 @@
 		<div class="my-auto">
 			<h1 class="mb-3">taxonomy tree</h1>
 
-			<div class="container" style="float: left; width: 50%">
+			<div class="container" style="float: left; width: 60%">
+
+				<h2>Selected Quasi-Identifier</h2>
+				<p><%=selectHeader.replaceAll(",", ",   \t\t")%></p>
+				
+				<br>
+				<br>	
+				
 				<h2>Tree Example</h2>
 				<p>
 					height|0|-1<br> height|1|0_50_100_150_200<br>
@@ -95,14 +104,11 @@
 					weight|1|0_50_100_150_200<br> weight|2|0_100_200<br>
 					gender|0|-1<br> gender|1|0_2
 				</p>
-				<br>
-				<br>
-				<h3>Selected Quasi-Identifier</h3>
-				<p><%=selectHeader%></p>
-
+			
 			</div>
 
-			<div class="container" style="float: right; width: 50%">
+			<div class="container" style="float: right; width: 40%">
+			
 				<form method="post" action="examplePage.jsp">
 					<h2>Taxonomy Tree</h2>
 					<textarea class="form-control col-sm-8" cols="100" rows="15"
@@ -113,6 +119,7 @@
 						value="<%=inputDataName%>" name="inputDataName" /> <br> <input
 						type="submit" class="btn btn-primary" value="Sampling Start!" />
 				</form>
+			
 			</div>
 
 
