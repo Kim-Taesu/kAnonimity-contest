@@ -18,14 +18,13 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Resume - Start Bootstrap Theme</title>
+<title>D2P project</title>
 
 <%
 	String inputDataName = request.getParameter("fileName1");
 	String uploadPath = request.getRealPath("/uploadFile");
-	//out.println("서버 내 저장 위치 : " + uploadPath + "<br/>");
 
-	int maxSize = 1024 * 1024 * 10; // 한번에 올릴 수 있는 파일 용량 : 10M로 제한
+	int maxSize = 1024 * 1024 * 1000; // 한번에 올릴 수 있는 파일 용량 : 10M로 제한
 
 	String name = "";
 	String subject = "";

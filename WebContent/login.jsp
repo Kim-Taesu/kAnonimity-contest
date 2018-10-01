@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=divice-width, inital-scale=1.0">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<title>Insert title here</title>
+<title>D2P project</title>
 </head>
 <body>
 	<nav class="navbar navbar-default">

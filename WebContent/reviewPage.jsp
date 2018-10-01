@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Resume - Start Bootstrap Theme</title>
+<title>D2P project</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -110,23 +110,23 @@
 	<section class="resume-section p-3 p-lg-5 d-flex flex-column"
 		id="Review">
 		<div class="my-auto">
-			<h1 class="mb-5">Reivew Your Setting</h1>
+			<h1 class="mb-5">Review Your Setting</h1>
 
 
 
 			<div class="row">
 
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12 col-md-4">
 					<h2 class="mb-3">Data Input</h2>
-					<div class="row-xs-12 row-md-6">
+					<div class="row-xs-12 row-md-4">
 						<div class="subheading mb-1">
 							<%=inputDataName%>
 						</div>
 						<br> <br>
 					</div>
 
-					<h2 class="mb-3">Selected Quasi Data</h2>
-					<div class="row-xs-6 row-md-6">
+					<h2 class="mb-3">Quasi Identifier</h2>
+					<div class="row-xs-6 row-md-4">
 						<div class="subheading mb-1">
 							<%=selectHeader.replaceAll(",", ",   ")%>
 						</div>
@@ -136,7 +136,7 @@
 					<h2 class="mb-3">
 						K Value
 					</h2>
-					<div class="row-xs-6 row-md-6">
+					<div class="row-xs-6 row-md-4">
 						<div class="subheading mb-0">
 							<%=kValue%>
 						</div>
@@ -156,10 +156,10 @@
 				</div>
 
 
-				<div class="col-xs-6 col-md-6">
+				<div class="container" style="float: right; width: 40%">
 
 					<h2>Taxonomy Tree</h2>
-					<textarea class="form-control col-sm-6" cols="100" rows="20"
+					<textarea class="form-control" cols="100" rows="20"
 						name="taxonomy"><%=taxonomy%></textarea>
 
 

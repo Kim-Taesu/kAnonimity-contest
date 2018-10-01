@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Resume - Start Bootstrap Theme</title>
+<title>D2P project</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -89,10 +89,13 @@
 		<div class="my-auto">
 			<h1 class="mb-3">taxonomy tree</h1>
 
-			<div class="container" style="float: left; width: 60%">
+			<div class="container" style="float: left; width: 40%">
 
-				<h2>Selected Quasi-Identifier</h2>
-				<p><%=selectHeader.replaceAll(",", ",   \t\t")%></p>
+				<h2>Quasi-Identifier</h2>
+								
+				<div class="subheading mb-1">
+					<%=selectHeader.replaceAll(",", ",   \t\t")%>
+				</div>
 				
 				<br>
 				<br>	
@@ -107,7 +110,7 @@
 			
 			</div>
 
-			<div class="container" style="float: right; width: 40%">
+			<div class="container" style="float: right; width: 60%">
 			
 				<form method="post" action="examplePage.jsp">
 					<h2>Taxonomy Tree</h2>

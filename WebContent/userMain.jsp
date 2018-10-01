@@ -9,7 +9,7 @@
 <!--  bootstrap -->
 <link rel="stylesheet" href="./css/bootstrap.min.css">
 <!--  custom bootstrap -->
-<link rel="stylesheet" href="./css/custom.css"><title>Insert title here</title>
+<link rel="stylesheet" href="./css/custom.css"><title>D2P project</title>
 </head>
 <body>
 <%

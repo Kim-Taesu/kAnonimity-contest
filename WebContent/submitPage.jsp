@@ -16,7 +16,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>Resume - Start Bootstrap Theme</title>
+<title>D2P project</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -80,7 +80,7 @@
 
 				<div class="col-xs-12 col-md-6">
 					<h2>Anonymized Data Sample</h2>
-					<table border="1" style="text-align: center;">
+					<table border="1" style="text-align: center; text-transform:uppercase">
 						<%
 							String userID = null;
 							if (session.getAttribute("userID") != null) {
@@ -138,7 +138,7 @@
 								long end = System.currentTimeMillis();
 
 								double running_time = (end - start) / 1000.0;
-								out.println("running time : " + running_time);
+								out.println("RUNNING TIME : " + running_time);
 								out.println("<br>");
 							} catch (Exception e) {
 								out.println("Error : " + e);
