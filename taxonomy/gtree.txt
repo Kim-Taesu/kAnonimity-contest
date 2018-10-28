@@ -1,8 +1,0 @@
-height|0|-1
-height|1|0_50_100_150_200
-height|2|0_100_200
-weight|0|-1
-weight|1|0_50_100_150_200
-weight|2|0_100_200
-gender|0|-1
-gender|1|0_2

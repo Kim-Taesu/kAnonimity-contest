@@ -1,0 +1,32 @@
+20181027 21:08:08 Scouter Server Version 1.7.3.1 2017-08-21 11:58 GMT
+  ____                  _            
+ / ___|  ___ ___  _   _| |_ ___ _ __ 
+ \___ \ / __/   \| | | | __/ _ \ '__|
+  ___) | (_| (+) | |_| | ||  __/ |   
+ |____/ \___\___/ \__,_|\__\___|_|                                      
+ Open Source S/W Performance Monitoring  
+ Scouter version 1.7.3.1
+ 
+20181027 21:08:08 Load Account Group File
+20181027 21:08:08 Load Account File
+20181027 21:08:08 Load Account Group File
+20181027 21:08:08 udp listen 0.0.0.0:6100
+20181027 21:08:08 	udp_host=0.0.0.0
+20181027 21:08:08 	udp_port=6100
+20181027 21:08:08 	udp_buffer=65535
+20181027 21:08:08 	udp_so_rcvbuf=4194304
+20181027 21:08:08 Load Account File
+20181027 21:08:08 	tcp_port=6100
+20181027 21:08:08 	cp_agent_so_timeout=60000
+20181027 21:08:08 	cp_client_so_timeout=8000
+20181027 21:08:13 [S215] Detected new alert rule : ErrorRate.alert
+20181027 21:08:13 PLUG-IN : scouter.server.plugin.IAlert loaded #xc2stbd
+20181027 21:08:13 PLUG-IN : scouter.server.plugin.ICounter loaded #x174id90
+20181027 21:08:13 PLUG-IN : scouter.server.plugin.IObject loaded #xvji2lk
+20181027 21:08:13 PLUG-IN : scouter.server.plugin.IXLog loaded #xpn868g
+20181027 21:08:13 PLUG-IN : scouter.server.plugin.IXLog loaded #x1gpgkq6
+20181027 21:08:13 PLUG-IN : scouter.server.plugin.IXLogProfile loaded #x174dhss
+20181027 21:08:13 PLUG-IN : scouter.server.plugin.ISummary loaded #x10j3bke
+20181027 21:08:34 [S104] New OBJECT  objType=linux objHash=xs5553u objName=/master addr=192.168.0.6 1.7.3.1 2017-08-21 11:58 GMT alive 2018-10-27 21:08:34.919 {detected=linux}
+20181027 21:10:11 [S104] New OBJECT  objType=tomcat objHash=zoqi8s5 objName=/master/ addr=127.0.0.1 1.7.3.1 2017-08-21 11:58 GMT alive 2018-10-27 21:10:11.295 {detected=tomcat,ADC=false}
+20181028 00:00:01 [S105] Update OBJECT  objType=linux objHash=xs5553u objName=/master addr=192.168.0.6 1.7.3.1 2017-08-21 11:58 GMT alive 2018-10-28 00:00:01.047 {detected=linux}
