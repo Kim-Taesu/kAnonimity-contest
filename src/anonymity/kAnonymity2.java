@@ -116,10 +116,7 @@ public class kAnonymity2 {
 			// pass header
 			String[] temp = buffer.readLine().split("\\"+delim);
 			ArrayList<Integer> headerInt = new ArrayList<Integer>();
-			System.out.println("delim : " + delim);
-			System.out.println("projectionList : " + projectionList);
-			for(String s : temp) System.out.println(s);
-
+			
 			for (int i = 0; i < this.projectionList.size(); i++) {
 				for (int j = 0; i < temp.length; j++) {
 					if (this.projectionList.get(i).equals(temp[j])) {
@@ -128,6 +125,8 @@ public class kAnonymity2 {
 					}
 				}
 			}
+			
+			System.out.println("headerInt : " + headerInt);
 
 			int curCount = 0;
 			while (true) {
