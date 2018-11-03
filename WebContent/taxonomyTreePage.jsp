@@ -36,12 +36,15 @@
 
 		String[] arr = request.getParameterValues("checked");
 		String selectHeader = "";
+
+		String delim = request.getParameter("delimiter");
+
 		for (int i = 0; i < arr.length; i++) {
 			if (i == arr.length - 1) {
 				selectHeader += arr[i];
 				break;
 			}
-			selectHeader += arr[i] + ",";
+			selectHeader += arr[i] + delim;
 		}
 
 		System.out.println("!!!taxonomy Tree Page!!!");
@@ -52,8 +55,8 @@
 		System.out.println("inputDataRealPath : " + inputDataRealPath);
 		System.out.println("inputDataName : " + inputDataName);
 		System.out.println("selectHeader : " + selectHeader);
-		
-		
+		System.out.println("delimiter : " + delim);
+
 	%>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"
@@ -92,14 +95,15 @@
 			<div class="container" style="float: left; width: 40%">
 
 				<h2>Quasi-Identifier</h2>
-								
+
 				<div class="subheading mb-1">
-					<%=selectHeader.replaceAll(",", ",   \t\t")%>
+					
+					<%=selectHeader.replaceAll("\\"+delim, ("   \t\t"))%>
 				</div>
-				
+
 				<br>
-				<br>	
-				
+				<br>
+
 				<h2>Tree Example</h2>
 				<p>
 					height|0|-1<br> height|1|0_50_100_150_200<br>
@@ -107,22 +111,23 @@
 					weight|1|0_50_100_150_200<br> weight|2|0_100_200<br>
 					gender|0|-1<br> gender|1|0_2
 				</p>
-			
+
 			</div>
 
 			<div class="container" style="float: right; width: 60%">
-			
+
 				<form method="post" action="examplePage.jsp">
 					<h2>Taxonomy Tree</h2>
 					<textarea class="form-control col-sm-8" cols="100" rows="15"
 						name="taxonomy"></textarea>
+						<input type="hidden" value="<%=delim%>" name="delimiter"/>
 					<input type="hidden" value="<%=selectHeader%>" name="selectHeader" />
 					<input type="hidden" value="<%=inputDataRealPath%>"
 						name="inputDataRealPath" /> <input type="hidden"
 						value="<%=inputDataName%>" name="inputDataName" /> <br> <input
 						type="submit" class="btn btn-primary" value="Sampling Start!" />
 				</form>
-			
+
 			</div>
 
 

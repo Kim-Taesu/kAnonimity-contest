@@ -44,6 +44,7 @@
 		String inputDataName = request.getParameter("inputDataName");
 		String kValue = request.getParameter("kValue");
 		String selectHeader = request.getParameter("selectHeader");
+		String delim = request.getParameter("delimiter");
 
 		Process process = null;
 		BufferedReader in = null;
@@ -135,6 +136,14 @@
 						</div>
 						<br> <br>
 					</div>
+					
+					<h2 class="mb-3">Delim</h2>
+					<div class="row-xs-6 row-md-4">
+						<div class="subheading mb-1">
+							<%=delim%>
+						</div>
+						<br> <br>
+					</div>
 
 					<h2 class="mb-3">K Value</h2>
 					<div class="row-xs-6 row-md-4">
@@ -151,6 +160,7 @@
 							name="inputDataRealPath" /> <input type="hidden"
 							value="<%=selectHeader%>" name="selectHeader" /><input
 							type="hidden" value="<%=inputDataName%>" name="inputDataName" />
+							<input type="hidden" value="<%=delim%>" name="delimiter"/>
 						<button type="submit" class="btn btn-danger">
 							Submit! <br>(Press button and wait for completion alarm)
 						</button>

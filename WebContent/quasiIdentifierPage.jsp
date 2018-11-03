@@ -28,7 +28,7 @@
 
 	String name = "";
 	String subject = "";
-
+	String delim = "";
 	//String fileName1 = ""; // 중복처리된 이름
 	String originalName = ""; // 중복 처리전 실제 원본 이름
 	long fileSize = 0; // 파일 사이즈
@@ -46,6 +46,9 @@
 		name = multi.getParameter("name");
 		// name="subject" 인 녀석 value를 가져옴
 		subject = multi.getParameter("subject");
+
+		//구분자
+		delim = multi.getParameter("delimiter");
 
 		// 전송한 전체 파일이름들을 가져옴
 		Enumeration files = multi.getFileNames();
@@ -87,6 +90,7 @@
 	System.out.println("inputDataName = " + inputDataName);
 	System.out.println("inputDataHeader = " + inputDataHeader);
 	System.out.println("inputDataRealPath = " + inputDataRealPath);
+	System.out.println("delimiter = " + delim);
 %>
 
 <!-- Bootstrap core CSS -->
@@ -117,11 +121,11 @@
 	%>
 
 	<script type="text/javascript">
-	
+
 	window.onload = function add_item(){
         // pre_set 에 있는 내용을 읽어와서 처리..
-        
-        
+
+
         <%request.setCharacterEncoding("UTF-8");
 
 			System.out.println("!!!quasi Identifier Page!!!");
@@ -129,8 +133,9 @@
 			System.out.println("inputDataRealPath : " + inputDataRealPath);
 			System.out.println("inputDataName : " + inputDataName);
 			System.out.println("inputDataHeader : " + inputDataHeader);
+			System.out.println("inputDelimiter : " + delim);
 
-			StringTokenizer st = new StringTokenizer(inputDataHeader, ",");
+			StringTokenizer st = new StringTokenizer(inputDataHeader, delim);
 			int cnt = st.countTokens();
 			String[] hArr = new String[cnt];
 			int i = 0;
@@ -141,12 +146,12 @@
 			for (int j = 0; j < hArr.length; j++) {
 				sb.append(hArr[j]);
 				if (j < hArr.length - 1) {
-					sb.append(",");
+					sb.append(delim);
 				}
 			}%>
-        
-        var str = "<%=sb.toString()%>";
-			var strArr = str.split(",");
+
+        	var str = "<%=sb.toString()%>";
+			var strArr = str.split('<%=delim.toString()%>');
 
 			for (var i = 0; i < strArr.length; i++) {
 
@@ -162,6 +167,7 @@
 				document.getElementById('label').innerHTML = strArr[i].toUpperCase();
 
 				div.innerHTML = document.getElementById('dest').innerHTML;
+
 			}
 
 		}
@@ -222,7 +228,7 @@
 						<h2 class="mb-2">Attribute Header</h2>
 						<div class="subheading mb-1">Select your header as a
 							quasi-identifier</div>
-						
+
 						<div class="container" id="dest" style="display: none;">
 							<p style="float: left; margin: 10px;">
 								<input type="checkbox" name="" value="" id="cb"><label
@@ -236,9 +242,9 @@
 								<!-- 동적 생성 위치 -->
 							</div>
 							<button type="submit" class="btn btn-primary pull-right">Next</button>
-							<input type="hidden" value="<%=inputDataRealPath%>"
-								name="inputDataRealPath" /> <input type="hidden"
-								value="<%=inputDataName%>" name="inputDataName" />
+							<input type="hidden" value="<%=inputDataRealPath%>" name="inputDataRealPath" />
+							<input type="hidden" value="<%=inputDataName%>" name="inputDataName" />
+							<input type="hidden" value="<%=delim%>" name="delimiter" />
 						</form>
 
 					</div>

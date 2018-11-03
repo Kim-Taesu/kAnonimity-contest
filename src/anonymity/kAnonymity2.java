@@ -28,7 +28,7 @@ public class kAnonymity2 {
 
 	// Original data
 	private String inputFile_T1 = "";
-
+	private String delim="";
 	private HashMap<String, Integer> maxMap = new HashMap<String, Integer>();
 	private HashMap<String, ArrayList<Integer>> rangeMap = new HashMap<String, ArrayList<Integer>>();
 	private ArrayList<String> projectionList = new ArrayList<String>();
@@ -84,17 +84,17 @@ public class kAnonymity2 {
 			// System.out.println("!!rangeMap : " + rangeMap + "\n");
 		}
 
-//		System.out.println("maxMap : " + maxMap);
-//		System.out.println("rangeMap : " + rangeMap);
+		System.out.println("maxMap : " + maxMap);
+		System.out.println("rangeMap : " + rangeMap);
 		System.out.println("loadGenTree Finish!!\n\n");
 
 	}
 
 	private ArrayList<Integer> fitNode;
 
-	public kAnonymity2(String Taxonomy, String header, String dataFilePath) {
-		StringTokenizer headerToken = new StringTokenizer(header, ",");
-
+	public kAnonymity2(String Taxonomy, String header, String dataFilePath, String delim) {
+		this.delim = delim;
+		StringTokenizer headerToken = new StringTokenizer(header, delim);
 		while (headerToken.hasMoreElements()) {
 			this.projectionList.add(headerToken.nextToken());
 		}
@@ -114,10 +114,11 @@ public class kAnonymity2 {
 			BufferedReader buffer = new BufferedReader(reader);
 
 			// pass header
-			String[] temp = buffer.readLine().split(",");
+			String[] temp = buffer.readLine().split("\\"+delim);
 			ArrayList<Integer> headerInt = new ArrayList<Integer>();
-
-//			System.out.println("projectionList : " + projectionList);
+			System.out.println("delim : " + delim);
+			System.out.println("projectionList : " + projectionList);
+			for(String s : temp) System.out.println(s);
 
 			for (int i = 0; i < this.projectionList.size(); i++) {
 				for (int j = 0; i < temp.length; j++) {
@@ -130,7 +131,7 @@ public class kAnonymity2 {
 
 			int curCount = 0;
 			while (true) {
-				String[] label = buffer.readLine().split(",");
+				String[] label = buffer.readLine().split("\\"+delim);
 				line_count++;
 				if (line_count > 1000)
 					break;
@@ -148,6 +149,8 @@ public class kAnonymity2 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("curTupleList : " + curTupleList);
 		System.out.println("loadData Finish!!");
 	}
 

@@ -1,0 +1,3 @@
+20181029 00:00:00 [S105] Update OBJECT  objType=linux objHash=xs5553u objName=/master addr=192.168.0.6 1.7.3.1 2017-08-21 11:58 GMT alive 2018-10-29 00:00:00.887 {detected=linux}
+20181029 09:43:59 [S105] Update OBJECT  objType=tomcat objHash=zoqi8s5 objName=/master/ addr=127.0.0.1 1.7.3.1 2017-08-21 11:58 GMT alive 2018-10-29 09:43:59.945 {detected=tomcat,ADC=false}
+20181030 00:00:01 [S105] Update OBJECT  objType=linux objHash=xs5553u objName=/master addr=192.168.0.6 1.7.3.1 2017-08-21 11:58 GMT alive 2018-10-30 00:00:01.385 {detected=linux}

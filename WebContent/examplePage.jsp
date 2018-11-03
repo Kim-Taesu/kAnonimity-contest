@@ -46,11 +46,11 @@
 		String selectHeader = request.getParameter("selectHeader");
 		String inputDataRealPath = request.getParameter("inputDataRealPath");
 		String inputDataName = request.getParameter("inputDataName");
+		String delim = request.getParameter("delimiter");
 
 		long start = System.currentTimeMillis();
-
 		//kAnonymity(String Taxonomy, String header, int Kvalue, String dataFilePath)
-		kAnonymity2 mykAnonymity = new kAnonymity2(taxonomy, selectHeader, inputDataRealPath);
+		kAnonymity2 mykAnonymity = new kAnonymity2(taxonomy, selectHeader, inputDataRealPath, delim);
 		String result = mykAnonymity.run();
 
 		result.replaceAll(", ", "\n");
@@ -113,21 +113,25 @@
 								value="<%=inputDataRealPath%>" name="inputDataRealPath" /> <input
 								type="hidden" value="<%=inputDataName%>" name="inputDataName" />
 							<input type="hidden" value="<%=selectHeader%>"
-								name="selectHeader" />
+								name="selectHeader" /> <input type="hidden" value="<%=delim%>"
+								name="delimiter" />
 							<button type="submit" class="btn btn-primary pull-right">Next</button>
 						</form>
 					</div>
 					<br> <br> <br>
 					<h2>What is Equivalent Class?</h2>
 					<div class="row-xs-6 row-md-6">
-						<img src="/WebContent/img/equivalent.png" width="700" alt="data example" />
+						<img src="/WebContent/img/equivalent.png" width="700"
+							alt="data example" />
 					</div>
 				</div>
 
 				<div class="col-xs-12 col-md-6">
-					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample Equivalent Class</h2>
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sample
+						Equivalent Class</h2>
 					<div class="col-xs-12 col-md-2">
-						<table border="1"	style="margin-left: 200px; margin-right: auto; text-align: center;">
+						<table border="1"
+							style="margin-left: 200px; margin-right: auto; text-align: center;">
 							<tr>
 								<th>Equivalent Class</th>
 								<th>Num</th>

@@ -72,7 +72,7 @@
 	<hr class="m-0">
 
 	<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="Input">
-		
+
 		<div class="my-auto">
 
 			<h1>data input</h1>
@@ -80,11 +80,13 @@
 			<div class="container">
 
 				<div class="container" style="float: left; width: 100%">
-					<h2 class="mb-1">Select your data (*.csv)</h2>
 					<form method="POST" action="quasiIdentifierPage.jsp" enctype="multipart/form-data">
 
 						<div class="form-group">
+							<h2 class="mb-1">Select your data.</h2>
 							<input type="file" class="form-control" id="customFile"	name="inputData">
+							<h3 class="mb-1">Enter your delimiter(<,> <\t> <|> <" "> etc.)</h3>
+							<input type="text" id="delimiter" name="delimiter">
 						</div>
 
 						<div class="form-group">
