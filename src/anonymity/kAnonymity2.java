@@ -28,7 +28,7 @@ public class kAnonymity2 {
 
 	// Original data
 	private String inputFile_T1 = "";
-	private String delim="";
+	private String delim = "";
 	private HashMap<String, Integer> maxMap = new HashMap<String, Integer>();
 	private HashMap<String, ArrayList<Integer>> rangeMap = new HashMap<String, ArrayList<Integer>>();
 	private ArrayList<String> projectionList = new ArrayList<String>();
@@ -114,9 +114,9 @@ public class kAnonymity2 {
 			BufferedReader buffer = new BufferedReader(reader);
 
 			// pass header
-			String[] temp = buffer.readLine().split("\\"+delim);
+			String[] temp = buffer.readLine().split("\\" + delim);
 			ArrayList<Integer> headerInt = new ArrayList<Integer>();
-			
+
 			for (int i = 0; i < this.projectionList.size(); i++) {
 				for (int j = 0; i < temp.length; j++) {
 					if (this.projectionList.get(i).equals(temp[j])) {
@@ -125,16 +125,19 @@ public class kAnonymity2 {
 					}
 				}
 			}
-			
+
 			System.out.println("headerInt : " + headerInt);
 
 			int curCount = 0;
 			while (true) {
-				String[] label = buffer.readLine().split("\\"+delim);
+				String[] label;
+				try {
+					label = buffer.readLine().split("\\" + delim);
+				} catch (Exception e) {
+					break;
+				}
 				line_count++;
 				if (line_count > 1000)
-					break;
-				if (label == null)
 					break;
 
 				ArrayList curTuple = new ArrayList();
@@ -148,7 +151,7 @@ public class kAnonymity2 {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("curTupleList : " + curTupleList);
 		System.out.println("loadData Finish!!");
 	}

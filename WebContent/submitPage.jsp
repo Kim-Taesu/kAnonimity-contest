@@ -93,6 +93,7 @@
 
 							System.out.println("\n\n!!!submit Page!!!");
 
+							String selectSensitiveHeader = request.getParameter("selectSensitiveHeader");
 							String delim = request.getParameter("delimiter");
 							String kValue = request.getParameter("kValue");
 							String selectHeader = request.getParameter("selectHeader");
@@ -140,7 +141,7 @@
 								String command = "time /home/hp/spark-2.3.0-bin-hadoop2.7/bin/spark-submit --class com.kAnonymity_maven.kAnonymity_project --master yarn --deploy-mode cluster --driver-memory 10g --executor-memory 10g --executor-cores 4 "
 										+ "hdfs:///jars/kAnonymity_maven-0.0.1-SNAPSHOT.jar " + kValue + "  /lg_project/data/"
 										+ inputDataName + " " + selectHeader + " " + "hdfs:///lg_project/data/"
-										+ (String) session.getAttribute("userID") + "_" + "gtree.txt" + " " + inputDataName + " " + delim + " 10";
+										+ (String) session.getAttribute("userID") + "_" + "gtree.txt" + " " + inputDataName + " " + delim + " " + selectSensitiveHeader + " 10";
 								//String command = "pwd";
 
 								System.out.println("Spark command : " + command);

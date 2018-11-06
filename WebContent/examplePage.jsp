@@ -42,6 +42,7 @@
 
 		System.out.println("!!!Example Page!!!");
 
+		String selectSensitiveHeader = request.getParameter("selectSensitiveHeader");
 		String taxonomy = request.getParameter("taxonomy");
 		String selectHeader = request.getParameter("selectHeader");
 		String inputDataRealPath = request.getParameter("inputDataRealPath");
@@ -114,7 +115,8 @@
 								type="hidden" value="<%=inputDataName%>" name="inputDataName" />
 							<input type="hidden" value="<%=selectHeader%>"
 								name="selectHeader" /> <input type="hidden" value="<%=delim%>"
-								name="delimiter" />
+								name="delimiter" /><input type="hidden"
+								value="<%=selectSensitiveHeader%>" name="selectSensitiveHeader" />
 							<button type="submit" class="btn btn-primary pull-right">Next</button>
 						</form>
 					</div>

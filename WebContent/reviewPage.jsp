@@ -39,6 +39,7 @@
 
 		System.out.println("!!!review page!!!");
 
+		String selectSensitiveHeader = request.getParameter("selectSensitiveHeader");
 		String taxonomy = request.getParameter("taxonomy");
 		String inputDataRealPath = request.getParameter("inputDataRealPath");
 		String inputDataName = request.getParameter("inputDataName");
@@ -58,7 +59,7 @@
 
 		String line = "";
 		try {
-			
+
 			String command = "hadoop fs -put " + inputDataRealPath + " /lg_project/data/";
 			//String command = "/home/hp/eclipse-web/SWDevelopment/sparkCommand/test";
 			process = Runtime.getRuntime().exec(command);
@@ -136,8 +137,8 @@
 						</div>
 						<br> <br>
 					</div>
-					
-					<h2 class="mb-3">Delim</h2>
+
+					<h2 class="mb-3">Delimiter</h2>
 					<div class="row-xs-6 row-md-4">
 						<div class="subheading mb-1">
 							<%=delim%>
@@ -160,7 +161,9 @@
 							name="inputDataRealPath" /> <input type="hidden"
 							value="<%=selectHeader%>" name="selectHeader" /><input
 							type="hidden" value="<%=inputDataName%>" name="inputDataName" />
-							<input type="hidden" value="<%=delim%>" name="delimiter"/>
+						<input type="hidden" value="<%=delim%>" name="delimiter" /> <input
+							type="hidden" value="<%=selectSensitiveHeader%>"
+							name="selectSensitiveHeader" />
 						<button type="submit" class="btn btn-danger">
 							Submit! <br>(Press button and wait for completion alarm)
 						</button>
